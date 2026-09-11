@@ -16,5 +16,73 @@ namespace TPWinform_equipo_g
         {
             InitializeComponent();
         }
+
+
+
+        private void txt_Buscador_Enter(object sender, EventArgs e)
+        {
+            if (txt_Buscador.Text == "Buscar...")
+            {
+                txt_Buscador.Text = "";
+                txt_Buscador.ForeColor = Color.Black;
+            }
+         
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (txt_Buscador.Text == "")
+            {
+                txt_Buscador.Text = "Buscar...";
+                txt_Buscador.ForeColor = Color.Gray;
+            }
+            
+            dgv_BaseDatos.Visible = false;
+        }
+
+        private void txt_Buscador_Leave(object sender, EventArgs e)
+        {
+            if (txt_Buscador.Text == "")
+            {
+                txt_Buscador.Text = "Buscar...";
+                txt_Buscador.ForeColor = Color.Gray;
+            }
+        }
+
+        private void bt_Categoria_Click(object sender, EventArgs e)
+        {
+            if (dgv_BaseDatos.Visible == false)
+            {
+                dgv_BaseDatos.Visible = true;
+            }
+            else
+            {
+                dgv_BaseDatos.Visible = false;
+            }
+        }
+
+        private void bt_Marca_Click(object sender, EventArgs e)
+        {
+            if (dgv_BaseDatos.Visible == false)
+            {
+                dgv_BaseDatos.Visible = true;
+            }
+            else
+            {
+                dgv_BaseDatos.Visible = false;
+            }
+        }
+
+        private void bt_Articulo_Click(object sender, EventArgs e)
+        {
+            if (dgv_BaseDatos.Visible == false)
+            {
+                dgv_BaseDatos.Visible = true;
+            }
+            else
+            {
+                dgv_BaseDatos.Visible = false;
+            }
+        }
     }
 }
