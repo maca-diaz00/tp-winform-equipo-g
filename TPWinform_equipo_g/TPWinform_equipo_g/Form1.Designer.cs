@@ -308,6 +308,7 @@
             // 
             // pb_Logo
             // 
+            this.pb_Logo.BackColor = System.Drawing.SystemColors.Control;
             this.pb_Logo.Image = ((System.Drawing.Image)(resources.GetObject("pb_Logo.Image")));
             this.pb_Logo.Location = new System.Drawing.Point(19, 27);
             this.pb_Logo.Name = "pb_Logo";

@@ -9,7 +9,7 @@ namespace TPWinform_equipo_g
     internal class Articulo
     {
         public int Id { get; set; }
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public decimal Precio { get; set; }

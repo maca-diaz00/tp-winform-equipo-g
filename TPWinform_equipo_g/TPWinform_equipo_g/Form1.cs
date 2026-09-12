@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TPWinform_equipo_g
 {
     public partial class Form1 : Form
@@ -71,6 +72,9 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = false;
             }
+            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            dgv_BaseDatos.DataSource = marcaNegocio.listar();
+
         }
 
         private void bt_Articulo_Click(object sender, EventArgs e)
