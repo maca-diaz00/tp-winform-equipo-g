@@ -384,8 +384,9 @@
             this.dgv_BaseDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_BaseDatos.Location = new System.Drawing.Point(225, 185);
             this.dgv_BaseDatos.Name = "dgv_BaseDatos";
-            this.dgv_BaseDatos.Size = new System.Drawing.Size(240, 150);
+            this.dgv_BaseDatos.Size = new System.Drawing.Size(345, 150);
             this.dgv_BaseDatos.TabIndex = 7;
+            this.dgv_BaseDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_BaseDatos_CellContentClick);
             // 
             // Form1
             // 

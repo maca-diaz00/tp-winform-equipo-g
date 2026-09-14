@@ -59,10 +59,12 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            else
-            {
-                dgv_BaseDatos.Visible = false;
-            }
+            //else
+            //{
+                //dgv_BaseDatos.Visible = false;
+            //}
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            dgv_BaseDatos.DataSource = categoriaNegocio.listar();
         }
 
         private void bt_Marca_Click(object sender, EventArgs e)
@@ -71,10 +73,10 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            else
-            {
-                dgv_BaseDatos.Visible = false;
-            }
+            //else
+            //{
+                //dgv_BaseDatos.Visible = false;
+            //}
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             dgv_BaseDatos.DataSource = marcaNegocio.listar();
 
@@ -86,12 +88,17 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            else
-            {
-                dgv_BaseDatos.Visible = false;
-            }
+            //else
+            //{
+                //dgv_BaseDatos.Visible = false;
+            //}
             dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
 
+
+        }
+
+        private void dgv_BaseDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
