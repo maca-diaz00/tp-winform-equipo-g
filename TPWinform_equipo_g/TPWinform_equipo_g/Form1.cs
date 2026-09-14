@@ -13,9 +13,12 @@ namespace TPWinform_equipo_g
 {
     public partial class Form1 : Form
     {
+
+        private ArticuloNegocio articuloNegocio;
         public Form1()
         {
             InitializeComponent();
+            articuloNegocio = new ArticuloNegocio();
         }
 
 
@@ -87,6 +90,9 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = false;
             }
+            dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+
+
         }
     }
 }
