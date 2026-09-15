@@ -147,6 +147,7 @@ namespace TPWinform_equipo_g
                 btnSiguienteImagen.Visible = true;
                 pbxArticulos.Visible = true;
                 indiceImagen = 0;
+                actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
             }
         }
@@ -162,6 +163,7 @@ namespace TPWinform_equipo_g
             if (indiceImagen < cantidadImagenes()-1)
             {
                 indiceImagen++;
+                actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
             }
             
@@ -172,8 +174,33 @@ namespace TPWinform_equipo_g
             if (indiceImagen >0)
             {
                 indiceImagen--;
+                actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
             }
         }
+
+        private void actualizarBotonesImagenes()
+        {
+            if (indiceImagen == 0)
+            {
+                btnAnteriorImagen.Enabled = false;
+            }
+            else
+            {
+                btnAnteriorImagen.Enabled = true;
+            }
+
+
+            if (indiceImagen == cantidadImagenes() - 1)
+            {
+                btnSiguienteImagen.Enabled = false;
+            }
+            else
+            {
+                btnSiguienteImagen.Enabled = true;
+            }
+        }
+
+
     }
 }
