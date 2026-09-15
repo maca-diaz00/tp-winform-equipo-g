@@ -21,5 +21,20 @@ namespace TPWinform_equipo_g
         [DisplayName("Categoría")]
         public Categoria Categoria { get; set; }
 
+
+        public Articulo()
+        {
+            Imagenes = new List<Imagen>();
+            Marca = new Marca();
+            Categoria = new Categoria();
+        }
+
+
+        public void agregarImagen(string nuevaImagen)
+        {
+            Imagen aux = new Imagen();
+            aux.UrlImagen = nuevaImagen;
+            Imagenes.Add(aux);
+        }
     }
 }

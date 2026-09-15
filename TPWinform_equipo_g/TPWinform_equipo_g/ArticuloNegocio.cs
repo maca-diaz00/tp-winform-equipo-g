@@ -17,23 +17,37 @@ namespace TPWinform_equipo_g
 
             try
             {
-                datos.setearConsulta("Select A.Id, Codigo, Nombre, A.Descripcion,M.Descripcion as Marca,C.Descripcion as Categoria, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C Where A.IdMarca=M.Id And A.IdCategoria=C.Id ");
+                datos.setearConsulta("Select A.Id, Codigo, Nombre, A.Descripcion,M.Descripcion as Marca,C.Descripcion as Categoria, Precio, ImagenUrl from ARTICULOS A, MARCAS M, CATEGORIAS C, IMAGENES I Where A.IdMarca=M.Id And A.IdCategoria=C.Id And A.Id=I.IdArticulo ");
                 datos.ejecutarConsulta();
 
                 while (datos.Lector.Read())
                 {
-                    Articulo aux = new Articulo();
-                    aux.Id = (int)datos.Lector["Id"];
-                    aux.Codigo = (string)datos.Lector["Codigo"];
-                    aux.Nombre = (string)datos.Lector["Nombre"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Categoria = new Categoria();
-                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    aux.Marca = new Marca();
-                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
 
-                    lista.Add(aux);
+                    bool bArticulo = false;
+
+                    foreach (Articulo item in lista)
+                    {
+                        if (item.Id == (int)datos.Lector["Id"])
+                        {
+                            bArticulo = true;
+                            item.agregarImagen((string)datos.Lector["ImagenUrl"]);
+                        }
+                    }
+
+                    if (!bArticulo)
+                    {
+
+                        Articulo aux = new Articulo();
+                        aux.Id = (int)datos.Lector["Id"];
+                        aux.Codigo = (string)datos.Lector["Codigo"];
+                        aux.Nombre = (string)datos.Lector["Nombre"];
+                        aux.Descripcion = (string)datos.Lector["Descripcion"];
+                        aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                        aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                        aux.Precio = (decimal)datos.Lector["Precio"];
+                        aux.agregarImagen((string)datos.Lector["ImagenUrl"]);
+                        lista.Add(aux);
+                    }
 
                 }
 

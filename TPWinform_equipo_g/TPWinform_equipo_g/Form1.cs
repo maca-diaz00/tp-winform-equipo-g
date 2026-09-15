@@ -15,10 +15,14 @@ namespace TPWinform_equipo_g
     {
 
         private ArticuloNegocio articuloNegocio;
+        private Articulo articuloActual;
+        private string tipoListado;
+        private int indiceImagen;
         public Form1()
         {
             InitializeComponent();
             articuloNegocio = new ArticuloNegocio();
+            articuloActual = new Articulo();
         }
 
 
@@ -42,6 +46,8 @@ namespace TPWinform_equipo_g
             }
             
             dgv_BaseDatos.Visible = false;
+            btnAnteriorImagen.Visible = false;
+            btnSiguienteImagen.Visible = false;
         }
 
         private void txt_Buscador_Leave(object sender, EventArgs e)
@@ -63,6 +69,7 @@ namespace TPWinform_equipo_g
             //{
                 //dgv_BaseDatos.Visible = false;
             //}
+            tipoListado = "Categoria";
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             dgv_BaseDatos.DataSource = categoriaNegocio.listar();
         }
@@ -78,6 +85,7 @@ namespace TPWinform_equipo_g
                 //dgv_BaseDatos.Visible = false;
             //}
             MarcaNegocio marcaNegocio = new MarcaNegocio();
+            tipoListado = "Marca";
             dgv_BaseDatos.DataSource = marcaNegocio.listar();
 
         }
@@ -92,14 +100,80 @@ namespace TPWinform_equipo_g
             //{
                 //dgv_BaseDatos.Visible = false;
             //}
+            tipoListado = "Articulo";
             dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+            
+            
 
 
         }
 
-        private void dgv_BaseDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private void mostrarImagen(Articulo articulo, int indice)
+        {
+            try
+            {
+                pbxArticulos.Load(articulo.Imagenes[indice].UrlImagen);
+            }
+            catch (Exception)
+            {
+
+                pbxArticulos.Load("https://media.istockphoto.com/id/1980276924/es/vector/sin-elemento-gr%C3%A1fico-en-miniatura-de-la-foto-no-se-ha-encontrado-ninguna-imagen-o-est%C3%A1.jpg?s=612x612&w=0&k=20&c=artWlQoi5R1edWQBv9LfzeLXupOcH_alZnMgvXdYkF4=");
+            }
+        }
+
+        private void dgv_BaseDatos_SelectionChanged(object sender, EventArgs e)
         {
 
+            if (tipoListado != "Articulo")
+            {
+
+                btnAnteriorImagen.Visible = false;
+                btnSiguienteImagen.Visible = false;
+                pbxArticulos.Visible = false;
+
+            }
+
+            
+        }
+
+        private void dgv_BaseDatos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (tipoListado == "Articulo")
+            {
+                articuloActual = (Articulo)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                btnAnteriorImagen.Visible = true;
+                btnSiguienteImagen.Visible = true;
+                pbxArticulos.Visible = true;
+                indiceImagen = 0;
+                mostrarImagen(articuloActual, indiceImagen);
+            }
+        }
+        private int cantidadImagenes()
+        {
+            return articuloActual.Imagenes.Count;
+        }
+
+        private void btnSiguienteImagen_Click(object sender, EventArgs e)
+        {
+          
+
+            if (indiceImagen < cantidadImagenes()-1)
+            {
+                indiceImagen++;
+                mostrarImagen(articuloActual, indiceImagen);
+            }
+            
+        }
+
+        private void btnAnteriorImagen_Click(object sender, EventArgs e)
+        {
+            if (indiceImagen >0)
+            {
+                indiceImagen--;
+                mostrarImagen(articuloActual, indiceImagen);
+            }
         }
     }
 }
