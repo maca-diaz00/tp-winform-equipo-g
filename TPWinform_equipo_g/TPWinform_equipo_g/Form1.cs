@@ -34,7 +34,7 @@ namespace TPWinform_equipo_g
                 txt_Buscador.Text = "";
                 txt_Buscador.ForeColor = Color.Black;
             }
-         
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,10 +44,16 @@ namespace TPWinform_equipo_g
                 txt_Buscador.Text = "Buscar...";
                 txt_Buscador.ForeColor = Color.Gray;
             }
-            
+
             dgv_BaseDatos.Visible = false;
             btnAnteriorImagen.Visible = false;
             btnSiguienteImagen.Visible = false;
+            btnAgregar.Visible = false;
+            btnEliminar.Visible = false;
+            btnEditar.Visible = false;
+            lblDetalleArticulo.Visible = false;
+            lblOcultarDetalle.Visible = false;
+            mostrarDetalleArticulo(false);
         }
 
         private void txt_Buscador_Leave(object sender, EventArgs e)
@@ -65,10 +71,9 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            //else
-            //{
-                //dgv_BaseDatos.Visible = false;
-            //}
+            btnAgregar.Visible = true;
+            btnEliminar.Visible = true;
+            btnEditar.Visible = true;
             tipoListado = "Categoria";
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             dgv_BaseDatos.DataSource = categoriaNegocio.listar();
@@ -80,10 +85,9 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            //else
-            //{
-                //dgv_BaseDatos.Visible = false;
-            //}
+            btnAgregar.Visible = true;
+            btnEliminar.Visible = true;
+            btnEditar.Visible = true;
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             tipoListado = "Marca";
             dgv_BaseDatos.DataSource = marcaNegocio.listar();
@@ -96,19 +100,18 @@ namespace TPWinform_equipo_g
             {
                 dgv_BaseDatos.Visible = true;
             }
-            //else
-            //{
-                //dgv_BaseDatos.Visible = false;
-            //}
+            btnAgregar.Visible = true;
+            btnEliminar.Visible = true;
+            btnEditar.Visible = true;
             tipoListado = "Articulo";
             dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
-            
-            
+
+
 
 
         }
 
-        
+
 
         private void mostrarImagen(Articulo articulo, int indice)
         {
@@ -132,10 +135,13 @@ namespace TPWinform_equipo_g
                 btnAnteriorImagen.Visible = false;
                 btnSiguienteImagen.Visible = false;
                 pbxArticulos.Visible = false;
+                lblDetalleArticulo.Visible = false;
+
 
             }
+            mostrarDetalleArticulo(false);
 
-            
+
         }
 
         private void dgv_BaseDatos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -146,6 +152,8 @@ namespace TPWinform_equipo_g
                 btnAnteriorImagen.Visible = true;
                 btnSiguienteImagen.Visible = true;
                 pbxArticulos.Visible = true;
+                lblDetalleArticulo.Visible = true;
+                lblOcultarDetalle.Visible = false;
                 indiceImagen = 0;
                 actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
@@ -158,20 +166,20 @@ namespace TPWinform_equipo_g
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
-          
 
-            if (indiceImagen < cantidadImagenes()-1)
+
+            if (indiceImagen < cantidadImagenes() - 1)
             {
                 indiceImagen++;
                 actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
             }
-            
+
         }
 
         private void btnAnteriorImagen_Click(object sender, EventArgs e)
         {
-            if (indiceImagen >0)
+            if (indiceImagen > 0)
             {
                 indiceImagen--;
                 actualizarBotonesImagenes();
@@ -201,6 +209,53 @@ namespace TPWinform_equipo_g
             }
         }
 
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
 
+        }
+
+
+
+        private void mostrarDetalleArticulo(bool mostrar)
+        {
+
+            lblCodigoD.Visible = mostrar;
+            lblNombreD.Visible = mostrar;
+            lblDescripcionD.Visible = mostrar;
+            lblMarcaD.Visible = mostrar;
+            lblCategoriaD.Visible = mostrar;
+            lblPrecioD.Visible = mostrar;
+            lblCodigoDetalle.Visible = mostrar;
+            lblNombreDetalle.Visible = mostrar;
+            lblDescripcionDetalle.Visible = mostrar;
+            lblMarcaDetalle.Visible = mostrar;
+            lblCategoriaDetalle.Visible = mostrar;
+            lblPrecioDetalle.Visible = mostrar;
+
+            lblCodigoDetalle.Text = articuloActual.Codigo;
+            lblNombreDetalle.Text = articuloActual.Nombre;
+            lblDescripcionDetalle.Text = articuloActual.Descripcion;
+            lblMarcaDetalle.Text = articuloActual.Marca.Descripcion;
+            lblCategoriaDetalle.Text = articuloActual.Categoria.Descripcion;
+            lblPrecioDetalle.Text = articuloActual.Precio.ToString();
+
+
+
+
+        }
+
+        private void lblDetalleArticulo_Click(object sender, EventArgs e)
+        {
+            mostrarDetalleArticulo(true);
+            lblDetalleArticulo.Visible = false;
+            lblOcultarDetalle.Visible = true;
+        }
+
+        private void lblOcultarDetalle_Click(object sender, EventArgs e)
+        {
+            mostrarDetalleArticulo(false);
+            lblOcultarDetalle.Visible = false;
+            lblDetalleArticulo.Visible = true;
+        }
     }
 }
