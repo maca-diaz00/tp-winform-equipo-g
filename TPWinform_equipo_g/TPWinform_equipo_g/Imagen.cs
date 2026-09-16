@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPWinform_equipo_g
 {
-    internal class Imagen
+    public class Imagen
     {
         public int Id { get; set; }
         public int IdArticulo { get; set; }

@@ -15,10 +15,10 @@ namespace TPWinform_equipo_g
 
         private CategoriaNegocio categoriaNegocio;
         private MarcaNegocio marcaNegocio;
-        private Articulo nuevoArticulo;
+        private Articulo articulo=null;
         private ArticuloNegocio articuloNegocio;
         private ImagenNegocio imagenNegocio;
-        private Imagen aux;
+        private Imagen imagenAux;
         private int indiceImagen;
 
         
@@ -29,9 +29,20 @@ namespace TPWinform_equipo_g
             categoriaNegocio = new CategoriaNegocio();
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
-            nuevoArticulo = new Articulo();
             imagenNegocio = new ImagenNegocio();
             
+
+        }
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            Text = "Modificar articulo";
+            this.articulo = articulo;
+            categoriaNegocio = new CategoriaNegocio();
+            marcaNegocio = new MarcaNegocio();
+            articuloNegocio = new ArticuloNegocio();
+            imagenNegocio = new ImagenNegocio();
+
 
         }
 
@@ -44,7 +55,22 @@ namespace TPWinform_equipo_g
             try
             {
                 cbxCategoria.DataSource = categoriaNegocio.listar();
+                cbxCategoria.ValueMember = "Id";
+                cbxCategoria.DisplayMember = "Descripcion";
                 cbxMarca.DataSource = marcaNegocio.listar();
+                cbxMarca.ValueMember = "Id";
+                cbxMarca.DisplayMember = "Descripcion";
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.Codigo;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtNombre.Text = articulo.Nombre;
+                    //ver como encarar las imagenes
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cbxCategoria.SelectedValue = articulo.Categoria.Id;
+                    cbxMarca.SelectedValue = articulo.Marca.Id;
+                }
             }
             catch (Exception ex)
             {
@@ -58,32 +84,46 @@ namespace TPWinform_equipo_g
             
             try
             {
-
-                nuevoArticulo.Codigo = txtCodigo.Text;
-                nuevoArticulo.Nombre = txtNombre.Text;
-                nuevoArticulo.Descripcion = txtDescripcion.Text;
-                nuevoArticulo.Marca = (Marca)cbxMarca.SelectedItem;
-                nuevoArticulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
-                nuevoArticulo.Precio =decimal.Parse(txtPrecio.Text);
-
-                articuloNegocio.nuevoArticulo(nuevoArticulo);
+                if (articulo == null)
+                {
+                    articulo = new Articulo();
+                }
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Marca = (Marca)cbxMarca.SelectedItem;
+                articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+                articulo.Precio =decimal.Parse(txtPrecio.Text);
+                if (articulo.cantidadImagenes() == 0)
+                {
+                    articulo.agregarImagen("");
+                }
 
 
                 /*int nuevasImagenes = nuevoArticulo.cantidadImagenes();
                 for(int i = 0; i < nuevasImagenes; i++)
                 {
-                    aux = new Imagen();
-                    aux.IdArticulo = nuevoArticulo.Id;
-                    aux.UrlImagen = nuevoArticulo.Imagenes[i].UrlImagen;
+                    imagenAux = new Imagen();
+                    imagenAux.IdArticulo = nuevoArticulo.Id;
+                    imagenAux.UrlImagen = nuevoArticulo.Imagenes[i].UrlImagen;
 
-                    imagenNegocio.nuevaImagen(aux);
+                    imagenNegocio.nuevaImagen(imagenAux);
                 }
                 */
                 /*no se como encarar esta parte porque no se como recuperar el ID que va a generar
                 la bbdd*/
+                if (articulo.Id != 0)
+                {
+                    articuloNegocio.modificarArticulo(articulo);
+                    MessageBox.Show("Articulo modificado exitosamente!");
+                }
+                else
+                {
+                    articuloNegocio.nuevoArticulo(articulo);
+                    MessageBox.Show("Articulo creado exitosamente!");
 
+                }
 
-                MessageBox.Show("Articulo creado exitosamente!");
                 Close();
 
             }
@@ -117,10 +157,10 @@ namespace TPWinform_equipo_g
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            nuevoArticulo.agregarImagen(txtImagen.Text);
+            articulo.agregarImagen(txtImagen.Text);
             txtImagen.Text = "";
-            indiceImagen = nuevoArticulo.cantidadImagenes() - 1;
-            mostrarImagen(nuevoArticulo, indiceImagen);
+            indiceImagen = articulo.cantidadImagenes() - 1;
+            mostrarImagen(articulo, indiceImagen);
             btnEliminarImagen.Visible = true;
             actualizarBotonesImagenes();
 
@@ -142,16 +182,16 @@ namespace TPWinform_equipo_g
 
         private void btnEliminarImagen_Click(object sender, EventArgs e)
         {
-            nuevoArticulo.Imagenes.RemoveAt(indiceImagen);
+            articulo.Imagenes.RemoveAt(indiceImagen);
             
-            if (indiceImagen == nuevoArticulo.cantidadImagenes())
+            if (indiceImagen == articulo.cantidadImagenes())
             {
                 indiceImagen--;
             }
 
-            if (nuevoArticulo.cantidadImagenes() != 0)
+            if (articulo.cantidadImagenes() != 0)
             {
-                mostrarImagen(nuevoArticulo, indiceImagen);
+                mostrarImagen(articulo, indiceImagen);
             }
 
             actualizarBotonesImagenes();
@@ -163,25 +203,25 @@ namespace TPWinform_equipo_g
             {
                 indiceImagen--;
                 actualizarBotonesImagenes();
-                mostrarImagen(nuevoArticulo, indiceImagen);
+                mostrarImagen(articulo, indiceImagen);
             }
 
         }
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
-            if (indiceImagen < nuevoArticulo.cantidadImagenes() - 1)
+            if (indiceImagen < articulo.cantidadImagenes() - 1)
             {
                 indiceImagen++;
                 actualizarBotonesImagenes();
-                mostrarImagen(nuevoArticulo, indiceImagen);
+                mostrarImagen(articulo, indiceImagen);
             }
 
         }
 
         private void actualizarBotonesImagenes()
         {
-            if (nuevoArticulo.cantidadImagenes() ==0)
+            if (articulo.cantidadImagenes() ==0)
             {
                 btnAnteriorImagen.Visible = false;
                 btnSiguienteImagen.Visible = false;
@@ -204,7 +244,7 @@ namespace TPWinform_equipo_g
                 }
 
 
-                if (indiceImagen == nuevoArticulo.cantidadImagenes() - 1)
+                if (indiceImagen == articulo.cantidadImagenes() - 1)
                 {
                     btnSiguienteImagen.Enabled = false;
                 }

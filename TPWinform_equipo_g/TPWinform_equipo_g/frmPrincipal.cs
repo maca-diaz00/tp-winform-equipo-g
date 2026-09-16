@@ -19,12 +19,16 @@ namespace TPWinform_equipo_g
         private string tipoListado;
         private int indiceImagen;
         private frmAltaArticulo frmAltaArticulo;
+        CategoriaNegocio categoriaNegocio;
+        MarcaNegocio marcaNegocio;
         public frmPrincipal()
         {
             InitializeComponent();
             articuloNegocio = new ArticuloNegocio();
             articuloActual = new Articulo();
-           
+            categoriaNegocio = new CategoriaNegocio();
+            marcaNegocio = new MarcaNegocio();
+
         }
 
 
@@ -77,8 +81,9 @@ namespace TPWinform_equipo_g
             btnEliminar.Visible = true;
             btnEditar.Visible = true;
             tipoListado = "Categoria";
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-            dgv_BaseDatos.DataSource = categoriaNegocio.listar();
+            mostrarDetalleArticulo(false);
+            cargarDgv(); 
+           
         }
 
         private void bt_Marca_Click(object sender, EventArgs e)
@@ -90,9 +95,9 @@ namespace TPWinform_equipo_g
             btnAgregar.Visible = true;
             btnEliminar.Visible = true;
             btnEditar.Visible = true;
-            MarcaNegocio marcaNegocio = new MarcaNegocio();
+            mostrarDetalleArticulo(false);
             tipoListado = "Marca";
-            dgv_BaseDatos.DataSource = marcaNegocio.listar();
+            cargarDgv();
 
         }
 
@@ -107,6 +112,10 @@ namespace TPWinform_equipo_g
             btnEditar.Visible = true;
             tipoListado = "Articulo";
             dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+            dgv_BaseDatos.Columns["Id"].Visible = false;
+            dgv_BaseDatos.Columns["Codigo"].Visible = false;
+            dgv_BaseDatos.Columns["Categoria"].Visible = false;
+
 
 
 
@@ -266,5 +275,35 @@ namespace TPWinform_equipo_g
         {
 
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (tipoListado == "Articulo")
+            {
+                frmAltaArticulo = new frmAltaArticulo(articuloActual);
+                frmAltaArticulo.ShowDialog();
+                
+            }
+
+            cargarDgv();
+        }
+
+        private void cargarDgv()
+        {
+            if (tipoListado == "Articulo")
+            {
+                dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+            }
+            else if (tipoListado == "Categoria")
+            {
+                dgv_BaseDatos.DataSource = categoriaNegocio.listar();
+            }
+            else if (tipoListado == "Marca")
+            {
+                dgv_BaseDatos.DataSource = marcaNegocio.listar();
+            }
+        }
+
+          
     }
 }

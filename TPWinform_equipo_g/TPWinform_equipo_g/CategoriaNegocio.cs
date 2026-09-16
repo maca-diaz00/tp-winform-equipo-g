@@ -32,7 +32,7 @@ namespace TPWinform_equipo_g
                 }
                 catch (Exception ex)
                 {
-                    throw;
+                    throw ex;
                 }
                 finally
                 {

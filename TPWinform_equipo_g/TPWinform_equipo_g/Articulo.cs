@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace TPWinform_equipo_g
 {
-    internal class Articulo
+    public class Articulo
     {
         public int Id { get; set; }
         [DisplayName("Código")]
