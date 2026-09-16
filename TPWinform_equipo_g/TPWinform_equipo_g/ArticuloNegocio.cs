@@ -8,11 +8,12 @@ namespace TPWinform_equipo_g
 {
     internal class ArticuloNegocio
     {
+        private AccesoDatos datos = new AccesoDatos();
 
         public List<Articulo> listarArticulos()
         {
             List<Articulo> lista = new List<Articulo>();
-            AccesoDatos datos = new AccesoDatos();
+            
 
 
             try
@@ -63,6 +64,35 @@ namespace TPWinform_equipo_g
             {
                 datos.cerrarConexion();
             }
+
+        }
+
+        public void nuevoArticulo(Articulo nuevo)
+        {
+            
+
+            try
+            {
+                datos.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio) values (@codigo,@nombre, @descripcion, @marca, @categoria, @precio)");
+                datos.setearParametro("@codigo", nuevo.Codigo);
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@descripcion", nuevo.Descripcion);
+                datos.setearParametro("@marca", nuevo.Marca.Id);
+                datos.setearParametro("@categoria", nuevo.Categoria.Id);
+                datos.setearParametro("@precio", nuevo.Precio);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
 
         }
 

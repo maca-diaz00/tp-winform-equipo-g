@@ -1,6 +1,6 @@
 ﻿namespace TPWinform_equipo_g
 {
-    partial class Form1
+    partial class frmPrincipal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,6 +86,7 @@
             this.lblCategoriaDetalle = new System.Windows.Forms.Label();
             this.lblPrecioDetalle = new System.Windows.Forms.Label();
             this.lblOcultarDetalle = new System.Windows.Forms.Label();
+            this.lblBorrarBusqueda = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_BaseDatos)).BeginInit();
@@ -343,7 +344,7 @@
             this.bt_Buscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Buscar.BackColor = System.Drawing.Color.LightGray;
             this.bt_Buscar.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Buscar.Location = new System.Drawing.Point(1050, 27);
+            this.bt_Buscar.Location = new System.Drawing.Point(1067, 32);
             this.bt_Buscar.Name = "bt_Buscar";
             this.bt_Buscar.Size = new System.Drawing.Size(86, 20);
             this.bt_Buscar.TabIndex = 2;
@@ -354,7 +355,7 @@
             // 
             this.bt_Categoria.BackColor = System.Drawing.Color.Azure;
             this.bt_Categoria.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Categoria.Location = new System.Drawing.Point(325, 53);
+            this.bt_Categoria.Location = new System.Drawing.Point(353, 27);
             this.bt_Categoria.Name = "bt_Categoria";
             this.bt_Categoria.Size = new System.Drawing.Size(146, 30);
             this.bt_Categoria.TabIndex = 3;
@@ -366,7 +367,7 @@
             // 
             this.bt_Marca.BackColor = System.Drawing.Color.Azure;
             this.bt_Marca.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Marca.Location = new System.Drawing.Point(487, 53);
+            this.bt_Marca.Location = new System.Drawing.Point(515, 27);
             this.bt_Marca.Name = "bt_Marca";
             this.bt_Marca.Size = new System.Drawing.Size(146, 30);
             this.bt_Marca.TabIndex = 4;
@@ -378,7 +379,7 @@
             // 
             this.bt_Articulo.BackColor = System.Drawing.Color.Azure;
             this.bt_Articulo.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Articulo.Location = new System.Drawing.Point(164, 53);
+            this.bt_Articulo.Location = new System.Drawing.Point(192, 27);
             this.bt_Articulo.Name = "bt_Articulo";
             this.bt_Articulo.Size = new System.Drawing.Size(146, 30);
             this.bt_Articulo.TabIndex = 5;
@@ -389,7 +390,7 @@
             // txt_Buscador
             // 
             this.txt_Buscador.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_Buscador.Location = new System.Drawing.Point(740, 27);
+            this.txt_Buscador.Location = new System.Drawing.Point(748, 32);
             this.txt_Buscador.Name = "txt_Buscador";
             this.txt_Buscador.Size = new System.Drawing.Size(291, 20);
             this.txt_Buscador.TabIndex = 6;
@@ -408,11 +409,11 @@
             this.dgv_BaseDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_BaseDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_BaseDatos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgv_BaseDatos.Location = new System.Drawing.Point(164, 145);
+            this.dgv_BaseDatos.Location = new System.Drawing.Point(248, 138);
             this.dgv_BaseDatos.MultiSelect = false;
             this.dgv_BaseDatos.Name = "dgv_BaseDatos";
             this.dgv_BaseDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_BaseDatos.Size = new System.Drawing.Size(736, 356);
+            this.dgv_BaseDatos.Size = new System.Drawing.Size(652, 293);
             this.dgv_BaseDatos.TabIndex = 7;
             this.dgv_BaseDatos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_BaseDatos_CellClick);
             this.dgv_BaseDatos.SelectionChanged += new System.EventHandler(this.dgv_BaseDatos_SelectionChanged);
@@ -484,7 +485,7 @@
             // 
             this.lblDetalleArticulo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetalleArticulo.AutoSize = true;
-            this.lblDetalleArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDetalleArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetalleArticulo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblDetalleArticulo.Location = new System.Drawing.Point(1017, 323);
             this.lblDetalleArticulo.Name = "lblDetalleArticulo";
@@ -628,7 +629,7 @@
             // 
             this.lblOcultarDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOcultarDetalle.AutoSize = true;
-            this.lblOcultarDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOcultarDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOcultarDetalle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblOcultarDetalle.Location = new System.Drawing.Point(1017, 323);
             this.lblOcultarDetalle.Name = "lblOcultarDetalle";
@@ -637,11 +638,23 @@
             this.lblOcultarDetalle.Text = "Ocultar detalle";
             this.lblOcultarDetalle.Click += new System.EventHandler(this.lblOcultarDetalle_Click);
             // 
-            // Form1
+            // lblBorrarBusqueda
+            // 
+            this.lblBorrarBusqueda.AutoSize = true;
+            this.lblBorrarBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBorrarBusqueda.Location = new System.Drawing.Point(1045, 33);
+            this.lblBorrarBusqueda.Name = "lblBorrarBusqueda";
+            this.lblBorrarBusqueda.Size = new System.Drawing.Size(16, 15);
+            this.lblBorrarBusqueda.TabIndex = 29;
+            this.lblBorrarBusqueda.Text = "X";
+            this.lblBorrarBusqueda.Click += new System.EventHandler(this.lblBorrarBusqueda_Click);
+            // 
+            // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1234, 582);
+            this.Controls.Add(this.lblBorrarBusqueda);
             this.Controls.Add(this.lblOcultarDetalle);
             this.Controls.Add(this.lblPrecioDetalle);
             this.Controls.Add(this.lblCategoriaDetalle);
@@ -672,7 +685,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1250, 621);
-            this.Name = "Form1";
+            this.Name = "frmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -745,6 +758,7 @@
         private System.Windows.Forms.Label lblCategoriaDetalle;
         private System.Windows.Forms.Label lblPrecioDetalle;
         private System.Windows.Forms.Label lblOcultarDetalle;
+        private System.Windows.Forms.Label lblBorrarBusqueda;
     }
 }
 

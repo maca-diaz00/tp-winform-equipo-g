@@ -36,5 +36,17 @@ namespace TPWinform_equipo_g
             aux.UrlImagen = nuevaImagen;
             Imagenes.Add(aux);
         }
+
+        public void eliminarImagen(string imagen)
+        {
+            Imagen aux = new Imagen();
+            aux.UrlImagen = imagen;
+            Imagenes.Remove(aux);
+        }
+
+        public int cantidadImagenes()
+        {
+            return Imagenes.Count;
+        }
     }
 }

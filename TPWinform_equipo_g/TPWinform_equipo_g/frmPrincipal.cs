@@ -11,18 +11,20 @@ using System.Windows.Forms;
 
 namespace TPWinform_equipo_g
 {
-    public partial class Form1 : Form
+    public partial class frmPrincipal : Form
     {
 
         private ArticuloNegocio articuloNegocio;
         private Articulo articuloActual;
         private string tipoListado;
         private int indiceImagen;
-        public Form1()
+        private frmAltaArticulo frmAltaArticulo;
+        public frmPrincipal()
         {
             InitializeComponent();
             articuloNegocio = new ArticuloNegocio();
             articuloActual = new Articulo();
+           
         }
 
 
@@ -159,16 +161,13 @@ namespace TPWinform_equipo_g
                 mostrarImagen(articuloActual, indiceImagen);
             }
         }
-        private int cantidadImagenes()
-        {
-            return articuloActual.Imagenes.Count;
-        }
+       
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
 
 
-            if (indiceImagen < cantidadImagenes() - 1)
+            if (indiceImagen < articuloActual.cantidadImagenes() - 1)
             {
                 indiceImagen++;
                 actualizarBotonesImagenes();
@@ -199,7 +198,7 @@ namespace TPWinform_equipo_g
             }
 
 
-            if (indiceImagen == cantidadImagenes() - 1)
+            if (indiceImagen == articuloActual.cantidadImagenes() - 1)
             {
                 btnSiguienteImagen.Enabled = false;
             }
@@ -211,7 +210,12 @@ namespace TPWinform_equipo_g
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
+            if (tipoListado == "Articulo")
+            {
+                frmAltaArticulo = new frmAltaArticulo();
+                frmAltaArticulo.Text = "Nuevo Articulo";
+                frmAltaArticulo.ShowDialog();
+            }
         }
 
 
@@ -256,6 +260,11 @@ namespace TPWinform_equipo_g
             mostrarDetalleArticulo(false);
             lblOcultarDetalle.Visible = false;
             lblDetalleArticulo.Visible = true;
+        }
+
+        private void lblBorrarBusqueda_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
