@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TPWinform_equipo_g
+namespace Dominio
 {
     public class Imagen
     {

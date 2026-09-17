@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio;
 
-namespace TPWinform_equipo_g
+
+namespace Negocio
 {
-    internal class MarcaNegocio
+    public class MarcaNegocio
     {
         private AccesoDatos datos = new AccesoDatos();
         public List<Marca> listar()

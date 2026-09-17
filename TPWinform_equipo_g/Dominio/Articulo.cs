@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace TPWinform_equipo_g
+namespace Dominio
 {
     public class Articulo
     {

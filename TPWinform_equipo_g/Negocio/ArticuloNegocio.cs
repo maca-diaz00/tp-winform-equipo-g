@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dominio;
 
-namespace TPWinform_equipo_g
+
+namespace Negocio
+
 {
-    internal class ArticuloNegocio
+    public class ArticuloNegocio
     {
         private AccesoDatos datos = new AccesoDatos();
 
         public List<Articulo> listarArticulos()
         {
             List<Articulo> lista = new List<Articulo>();
-            
+
 
 
             try
@@ -71,7 +74,7 @@ namespace TPWinform_equipo_g
 
         public void nuevoArticulo(Articulo nuevo)
         {
-            
+
 
             try
             {
@@ -105,7 +108,7 @@ namespace TPWinform_equipo_g
             try
             {
                 datos.setearConsulta("update ARTICULOS set Codigo=@codigo, Nombre=@nombre, Descripcion=@descripcion, IdMarca=@idMarca, IdCategoria=@idCategoria, Precio=@precio Where Id=@id ");
-                    
+
                 datos.setearParametro("@codigo", modificado.Codigo);
                 datos.setearParametro("@nombre", modificado.Nombre);
                 datos.setearParametro("@descripcion", modificado.Descripcion);
@@ -132,3 +135,4 @@ namespace TPWinform_equipo_g
 
     }
 }
+
