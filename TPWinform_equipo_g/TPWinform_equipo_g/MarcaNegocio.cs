@@ -8,10 +8,10 @@ namespace TPWinform_equipo_g
 {
     internal class MarcaNegocio
     {
+        private AccesoDatos datos = new AccesoDatos();
         public List<Marca> listar()
         {
             List <Marca> listaMarcas= new List<Marca>();
-            AccesoDatos datos = new AccesoDatos();//se instancia datos para poder configurar luego
 
             try
             {
@@ -47,6 +47,25 @@ namespace TPWinform_equipo_g
 
 
 
+        }
+        public void nuevaMarca(Marca nuevaMarca)
+        {
+            try
+            {
+                datos.setearConsulta("Insert into MARCAS(Descripcion)values (@desc)");
+                datos.setearParametro("@desc", nuevaMarca.Descripcion);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

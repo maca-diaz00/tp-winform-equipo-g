@@ -21,6 +21,8 @@ namespace TPWinform_equipo_g
         private frmAltaArticulo frmAltaArticulo;
         CategoriaNegocio categoriaNegocio;
         MarcaNegocio marcaNegocio;
+        frmAltaMarca frmAltaMarca;
+
         public frmPrincipal()
         {
             InitializeComponent();
@@ -98,6 +100,7 @@ namespace TPWinform_equipo_g
             mostrarDetalleArticulo(false);
             tipoListado = "Marca";
             cargarDgv();
+            dgv_BaseDatos.Columns["Id"].Visible = false;
 
         }
 
@@ -225,7 +228,14 @@ namespace TPWinform_equipo_g
                 frmAltaArticulo.Text = "Nuevo Articulo";
                 frmAltaArticulo.ShowDialog();
             }
+            else if (tipoListado == "Marca")
+            {
+                frmAltaMarca = new frmAltaMarca();
+                frmAltaMarca.ShowDialog();
+                cargarDgv();
+            }
         }
+        
 
 
 

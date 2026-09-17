@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace TPWinform_equipo_g
+{
+    public partial class frmAltaMarca : Form
+    {
+        MarcaNegocio marcaNegocio;
+        Marca marca;
+        List<Marca> lista;
+        public frmAltaMarca()
+        {
+            InitializeComponent();
+            marcaNegocio = new MarcaNegocio();
+            marca = new Marca();
+            lista = new List<Marca>();
+            lista = marcaNegocio.listar();
+
+        }
+
+        private void frmAltaMarca_Load(object sender, EventArgs e)
+        {
+            dgvMarcas.DataSource = lista;
+            dgvMarcas.Columns["Id"].Visible = false;
+            dgvMarcas.Visible = false;
+            lblOcultarMarcas.Visible = false;
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            bool bExiste = false;
+
+            foreach (Marca item in lista)
+            {
+                if (item.Descripcion.ToUpper() == txtNombre.Text.ToUpper())
+                {
+                    MessageBox.Show("Ya existe una marca con ese nombre, intente nuevamente");
+                    txtNombre.Text = "";
+                    bExiste = true;
+                }
+            }
+
+
+            if (!bExiste)
+            {
+                if (txtNombre.Text == "")
+                {
+                    MessageBox.Show("Tiene que ingresar un nombre para agregarlo, intente nuevamente");
+                }
+                else
+                {
+
+                    try
+                    {
+
+                        marca.Descripcion = txtNombre.Text;
+                        marcaNegocio.nuevaMarca(marca);
+                        MessageBox.Show("Nueva marca registrada exitosamente!");
+                        Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw ex;
+                    }
+                }
+            }
+
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void mostrarMarcas(bool mostrar)
+        {
+            dgvMarcas.Visible = mostrar;
+            if (mostrar)
+            {
+                lblMarcasExistentes.Visible = false;
+                lblOcultarMarcas.Visible = true;
+            }
+            else
+            {
+                lblOcultarMarcas.Visible = false;
+                lblMarcasExistentes.Visible = true;
+            }
+        }
+
+        private void lblMarcasExistentes_Click(object sender, EventArgs e)
+        {
+            mostrarMarcas(true);
+        }
+
+        private void lblOcultarMarcas_Click(object sender, EventArgs e)
+        {
+            mostrarMarcas(false);
+        }
+    }
+}
