@@ -290,11 +290,18 @@ namespace TPWinform_equipo_g
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            Marca marcaSeleccionada;
+            marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;
             if (tipoListado == "Articulo")
             {
                 frmAltaArticulo = new frmAltaArticulo(articuloActual);
                 frmAltaArticulo.ShowDialog();
                 
+            }
+            else if (tipoListado == "Marca")
+            {
+                frmAltaMarca = new frmAltaMarca(marcaSeleccionada);
+                frmAltaMarca.ShowDialog();
             }
 
             cargarDgv();

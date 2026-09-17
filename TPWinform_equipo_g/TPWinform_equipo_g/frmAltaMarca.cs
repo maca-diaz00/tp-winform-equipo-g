@@ -14,9 +14,9 @@ namespace TPWinform_equipo_g
 {
     public partial class frmAltaMarca : Form
     {
-        MarcaNegocio marcaNegocio;
-        Marca marca;
-        List<Marca> lista;
+        private MarcaNegocio marcaNegocio;
+        private Marca marca = null;
+        private List<Marca> lista;
         public frmAltaMarca()
         {
             InitializeComponent();
@@ -27,8 +27,23 @@ namespace TPWinform_equipo_g
 
         }
 
+        public frmAltaMarca(Marca modificar)
+        {
+            InitializeComponent();
+            marcaNegocio = new MarcaNegocio();
+            marca = modificar;
+            lista = new List<Marca>();
+            lista = marcaNegocio.listar();
+            Text = "Modificar marca";
+
+        }
+
         private void frmAltaMarca_Load(object sender, EventArgs e)
         {
+            if (marca != null)
+            {
+                txtNombre.Text = marca.Descripcion;
+            }
             dgvMarcas.DataSource = lista;
             dgvMarcas.Columns["Id"].Visible = false;
             dgvMarcas.Visible = false;
@@ -63,9 +78,19 @@ namespace TPWinform_equipo_g
                     {
 
                         marca.Descripcion = txtNombre.Text;
-                        marcaNegocio.nuevaMarca(marca);
-                        MessageBox.Show("Nueva marca registrada exitosamente!");
-                        Close();
+                        if (marca.Id != 0)
+                        {
+                            marcaNegocio.modificarMarca(marca);
+                            MessageBox.Show("Marca modificada exitosamente!");
+                            Close();
+                           
+                        } else
+                        {
+
+                            marcaNegocio.modificarMarca(marca);
+                            MessageBox.Show("Marca modificada exitosamente!");
+                            Close();
+                        }
 
                     }
                     catch (Exception ex)
