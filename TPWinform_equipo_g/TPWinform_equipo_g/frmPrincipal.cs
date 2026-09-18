@@ -77,49 +77,72 @@ namespace TPWinform_equipo_g
 
         private void bt_Categoria_Click(object sender, EventArgs e)
         {
-            if (dgv_BaseDatos.Visible == false)
+            if (dgv_BaseDatos.Visible == false || tipoListado != "Categoria")
             {
                 dgv_BaseDatos.Visible = true;
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = true;
+                btnEditar.Visible = true;
+                tipoListado = "Categoria";
+                mostrarDetalleArticulo(false);
+                cargarDgv();
             }
-            btnAgregar.Visible = true;
-            btnEliminar.Visible = true;
-            btnEditar.Visible = true;
-            tipoListado = "Categoria";
-            mostrarDetalleArticulo(false);
-            cargarDgv(); 
-           
+            else if (dgv_BaseDatos.Visible == true && tipoListado == "Categoria")
+            {
+                dgv_BaseDatos.Visible = false;
+                btnAgregar.Visible = false;
+                btnEliminar.Visible = false;
+                btnEditar.Visible = false;
+
+            }
+
         }
 
         private void bt_Marca_Click(object sender, EventArgs e)
         {
-            if (dgv_BaseDatos.Visible == false)
+            if (dgv_BaseDatos.Visible == false || tipoListado != "Marca")
             {
                 dgv_BaseDatos.Visible = true;
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = true;
+                btnEditar.Visible = true;
+                mostrarDetalleArticulo(false);
+                tipoListado = "Marca";
+                cargarDgv();
+                dgv_BaseDatos.Columns["Id"].Visible = false;
             }
-            btnAgregar.Visible = true;
-            btnEliminar.Visible = true;
-            btnEditar.Visible = true;
-            mostrarDetalleArticulo(false);
-            tipoListado = "Marca";
-            cargarDgv();
-            dgv_BaseDatos.Columns["Id"].Visible = false;
+            else if (dgv_BaseDatos.Visible == true && tipoListado == "Marca")
+            {
+                dgv_BaseDatos.Visible = false;
+                btnAgregar.Visible = false;
+                btnEliminar.Visible = false;
+                btnEditar.Visible = false;
+
+            }
 
         }
 
         private void bt_Articulo_Click(object sender, EventArgs e)
         {
-            if (dgv_BaseDatos.Visible == false)
+            if (dgv_BaseDatos.Visible == false || tipoListado != "Articulo")
             {
                 dgv_BaseDatos.Visible = true;
+                btnAgregar.Visible = true;
+                btnEliminar.Visible = true;
+                btnEditar.Visible = true;
+                tipoListado = "Articulo";
+                dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+                dgv_BaseDatos.Columns["Id"].Visible = false;
+                dgv_BaseDatos.Columns["Codigo"].Visible = false;
+                dgv_BaseDatos.Columns["Categoria"].Visible = false;
+            } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
+            {
+                dgv_BaseDatos.Visible = false;
+                btnAgregar.Visible = false;
+                btnEliminar.Visible = false;
+                btnEditar.Visible = false;
+                
             }
-            btnAgregar.Visible = true;
-            btnEliminar.Visible = true;
-            btnEditar.Visible = true;
-            tipoListado = "Articulo";
-            dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
-            dgv_BaseDatos.Columns["Id"].Visible = false;
-            dgv_BaseDatos.Columns["Codigo"].Visible = false;
-            dgv_BaseDatos.Columns["Categoria"].Visible = false;
 
 
 
@@ -175,7 +198,7 @@ namespace TPWinform_equipo_g
                 mostrarImagen(articuloActual, indiceImagen);
             }
         }
-       
+
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
@@ -237,7 +260,7 @@ namespace TPWinform_equipo_g
                 cargarDgv();
             }
         }
-        
+
 
 
 
@@ -296,7 +319,7 @@ namespace TPWinform_equipo_g
             {
                 frmAltaArticulo = new frmAltaArticulo(articuloActual);
                 frmAltaArticulo.ShowDialog();
-                
+
             }
             else if (tipoListado == "Marca")
             {
@@ -323,6 +346,50 @@ namespace TPWinform_equipo_g
             }
         }
 
-          
+        private void txt_Buscador_TextChanged(object sender, EventArgs e)
+        {
+
+            if (tipoListado == "Articulo")
+            {
+                if (txt_Buscador.Text == "" || txt_Buscador.Text == "Buscar...")
+                {
+                    dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+                }
+                else
+                {
+                    List<Articulo> listaFiltrada;
+                    listaFiltrada = articuloNegocio.listarArticulos().FindAll(x => x.Nombre.ToUpper().Contains(txt_Buscador.Text.ToUpper()));
+                    dgv_BaseDatos.DataSource = listaFiltrada;
+                }
+            }
+            else if (tipoListado == "Marca")
+            {
+                if (txt_Buscador.Text == "" || txt_Buscador.Text == "Buscar...")
+                {
+                    dgv_BaseDatos.DataSource = marcaNegocio.listar();
+                }
+                else
+                {
+                    List<Marca> listaFiltrada;
+                    listaFiltrada = marcaNegocio.listar().FindAll(x => x.Descripcion.ToUpper().Contains(txt_Buscador.Text.ToUpper()));
+                    dgv_BaseDatos.DataSource = listaFiltrada;
+                }
+            }
+            else if (tipoListado == "Categoria")
+            {
+                if (txt_Buscador.Text == "" || txt_Buscador.Text == "Buscar...")
+                {
+                    dgv_BaseDatos.DataSource = categoriaNegocio.listar();
+                }
+                else
+                {
+                    List<Categoria> listaFiltrada;
+                    listaFiltrada = categoriaNegocio.listar().FindAll(x => x.Descripcion.ToUpper().Contains(txt_Buscador.Text.ToUpper()));
+                    dgv_BaseDatos.DataSource = listaFiltrada;
+                }
+            }
+        }
+
+  
     }
 }

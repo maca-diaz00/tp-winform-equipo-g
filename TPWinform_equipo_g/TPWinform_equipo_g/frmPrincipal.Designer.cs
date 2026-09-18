@@ -396,6 +396,7 @@
             this.txt_Buscador.TabIndex = 6;
             this.txt_Buscador.Text = "Buscar...";
             this.txt_Buscador.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_Buscador.TextChanged += new System.EventHandler(this.txt_Buscador_TextChanged);
             this.txt_Buscador.Enter += new System.EventHandler(this.txt_Buscador_Enter);
             this.txt_Buscador.Leave += new System.EventHandler(this.txt_Buscador_Leave);
             // 
