@@ -50,6 +50,13 @@
             this.btnAnteriorImagen = new System.Windows.Forms.Button();
             this.btnSiguienteImagen = new System.Windows.Forms.Button();
             this.btnAgregarImagen = new System.Windows.Forms.Button();
+            this.btnEditarCodigo = new System.Windows.Forms.Button();
+            this.btnEditarNombre = new System.Windows.Forms.Button();
+            this.btnEditarDesc = new System.Windows.Forms.Button();
+            this.btnEditarCat = new System.Windows.Forms.Button();
+            this.btnEditarMarca = new System.Windows.Forms.Button();
+            this.btnEditarPrecio = new System.Windows.Forms.Button();
+            this.btnModificarTodos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,7 +104,7 @@
             // 
             this.lblAltaCategoria.AutoSize = true;
             this.lblAltaCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAltaCategoria.Location = new System.Drawing.Point(45, 269);
+            this.lblAltaCategoria.Location = new System.Drawing.Point(45, 282);
             this.lblAltaCategoria.Name = "lblAltaCategoria";
             this.lblAltaCategoria.Size = new System.Drawing.Size(73, 17);
             this.lblAltaCategoria.TabIndex = 4;
@@ -107,7 +114,7 @@
             // 
             this.lblAltaPrecio.AutoSize = true;
             this.lblAltaPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAltaPrecio.Location = new System.Drawing.Point(66, 306);
+            this.lblAltaPrecio.Location = new System.Drawing.Point(66, 319);
             this.lblAltaPrecio.Name = "lblAltaPrecio";
             this.lblAltaPrecio.Size = new System.Drawing.Size(52, 17);
             this.lblAltaPrecio.TabIndex = 5;
@@ -115,6 +122,7 @@
             // 
             // txtCodigo
             // 
+            this.txtCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCodigo.Location = new System.Drawing.Point(147, 67);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(201, 20);
@@ -122,6 +130,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNombre.Location = new System.Drawing.Point(147, 106);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(201, 20);
@@ -129,6 +138,7 @@
             // 
             // txtDescripcion
             // 
+            this.txtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(147, 144);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -137,13 +147,15 @@
             // 
             // txtPrecio
             // 
-            this.txtPrecio.Location = new System.Drawing.Point(147, 306);
+            this.txtPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrecio.Location = new System.Drawing.Point(147, 319);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(201, 20);
             this.txtPrecio.TabIndex = 9;
             // 
             // cbxMarca
             // 
+            this.cbxMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxMarca.FormattingEnabled = true;
             this.cbxMarca.Location = new System.Drawing.Point(147, 235);
             this.cbxMarca.Name = "cbxMarca";
@@ -152,8 +164,9 @@
             // 
             // cbxCategoria
             // 
+            this.cbxCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxCategoria.FormattingEnabled = true;
-            this.cbxCategoria.Location = new System.Drawing.Point(147, 265);
+            this.cbxCategoria.Location = new System.Drawing.Point(147, 278);
             this.cbxCategoria.Name = "cbxCategoria";
             this.cbxCategoria.Size = new System.Drawing.Size(201, 21);
             this.cbxCategoria.TabIndex = 11;
@@ -188,7 +201,7 @@
             // 
             this.lblImagen.AutoSize = true;
             this.lblImagen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblImagen.Location = new System.Drawing.Point(66, 347);
+            this.lblImagen.Location = new System.Drawing.Point(66, 360);
             this.lblImagen.Name = "lblImagen";
             this.lblImagen.Size = new System.Drawing.Size(58, 17);
             this.lblImagen.TabIndex = 14;
@@ -196,7 +209,8 @@
             // 
             // txtImagen
             // 
-            this.txtImagen.Location = new System.Drawing.Point(147, 347);
+            this.txtImagen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtImagen.Location = new System.Drawing.Point(147, 360);
             this.txtImagen.Name = "txtImagen";
             this.txtImagen.Size = new System.Drawing.Size(201, 20);
             this.txtImagen.TabIndex = 15;
@@ -249,7 +263,7 @@
             // btnAgregarImagen
             // 
             this.btnAgregarImagen.BackColor = System.Drawing.Color.Honeydew;
-            this.btnAgregarImagen.Location = new System.Drawing.Point(354, 347);
+            this.btnAgregarImagen.Location = new System.Drawing.Point(354, 360);
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(21, 23);
             this.btnAgregarImagen.TabIndex = 20;
@@ -257,11 +271,89 @@
             this.btnAgregarImagen.UseVisualStyleBackColor = false;
             this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
             // 
+            // btnEditarCodigo
+            // 
+            this.btnEditarCodigo.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarCodigo.Image")));
+            this.btnEditarCodigo.Location = new System.Drawing.Point(354, 59);
+            this.btnEditarCodigo.Name = "btnEditarCodigo";
+            this.btnEditarCodigo.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarCodigo.TabIndex = 21;
+            this.btnEditarCodigo.UseVisualStyleBackColor = true;
+            this.btnEditarCodigo.Click += new System.EventHandler(this.btnEditarCodigo_Click);
+            // 
+            // btnEditarNombre
+            // 
+            this.btnEditarNombre.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarNombre.Image")));
+            this.btnEditarNombre.Location = new System.Drawing.Point(354, 99);
+            this.btnEditarNombre.Name = "btnEditarNombre";
+            this.btnEditarNombre.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarNombre.TabIndex = 22;
+            this.btnEditarNombre.UseVisualStyleBackColor = true;
+            this.btnEditarNombre.Click += new System.EventHandler(this.btnEditarNombre_Click);
+            // 
+            // btnEditarDesc
+            // 
+            this.btnEditarDesc.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarDesc.Image")));
+            this.btnEditarDesc.Location = new System.Drawing.Point(354, 144);
+            this.btnEditarDesc.Name = "btnEditarDesc";
+            this.btnEditarDesc.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarDesc.TabIndex = 23;
+            this.btnEditarDesc.UseVisualStyleBackColor = true;
+            this.btnEditarDesc.Click += new System.EventHandler(this.btnEditarDesc_Click);
+            // 
+            // btnEditarCat
+            // 
+            this.btnEditarCat.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarCat.Image")));
+            this.btnEditarCat.Location = new System.Drawing.Point(354, 270);
+            this.btnEditarCat.Name = "btnEditarCat";
+            this.btnEditarCat.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarCat.TabIndex = 24;
+            this.btnEditarCat.UseVisualStyleBackColor = true;
+            this.btnEditarCat.Click += new System.EventHandler(this.btnEditarCat_Click);
+            // 
+            // btnEditarMarca
+            // 
+            this.btnEditarMarca.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarMarca.Image")));
+            this.btnEditarMarca.Location = new System.Drawing.Point(354, 227);
+            this.btnEditarMarca.Name = "btnEditarMarca";
+            this.btnEditarMarca.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarMarca.TabIndex = 25;
+            this.btnEditarMarca.UseVisualStyleBackColor = true;
+            this.btnEditarMarca.Click += new System.EventHandler(this.btnEditarMarca_Click);
+            // 
+            // btnEditarPrecio
+            // 
+            this.btnEditarPrecio.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarPrecio.Image")));
+            this.btnEditarPrecio.Location = new System.Drawing.Point(354, 311);
+            this.btnEditarPrecio.Name = "btnEditarPrecio";
+            this.btnEditarPrecio.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarPrecio.TabIndex = 26;
+            this.btnEditarPrecio.UseVisualStyleBackColor = true;
+            this.btnEditarPrecio.Click += new System.EventHandler(this.btnEditarPrecio_Click);
+            // 
+            // btnModificarTodos
+            // 
+            this.btnModificarTodos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificarTodos.Location = new System.Drawing.Point(354, 27);
+            this.btnModificarTodos.Name = "btnModificarTodos";
+            this.btnModificarTodos.Size = new System.Drawing.Size(112, 26);
+            this.btnModificarTodos.TabIndex = 27;
+            this.btnModificarTodos.Text = "Modificar todos";
+            this.btnModificarTodos.UseVisualStyleBackColor = true;
+            this.btnModificarTodos.Click += new System.EventHandler(this.btnModificarTodos_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 526);
+            this.Controls.Add(this.btnModificarTodos);
+            this.Controls.Add(this.btnEditarPrecio);
+            this.Controls.Add(this.btnEditarMarca);
+            this.Controls.Add(this.btnEditarCat);
+            this.Controls.Add(this.btnEditarDesc);
+            this.Controls.Add(this.btnEditarNombre);
+            this.Controls.Add(this.btnEditarCodigo);
             this.Controls.Add(this.btnAgregarImagen);
             this.Controls.Add(this.btnSiguienteImagen);
             this.Controls.Add(this.btnAnteriorImagen);
@@ -316,5 +408,12 @@
         private System.Windows.Forms.Button btnAnteriorImagen;
         private System.Windows.Forms.Button btnSiguienteImagen;
         private System.Windows.Forms.Button btnAgregarImagen;
+        private System.Windows.Forms.Button btnEditarCodigo;
+        private System.Windows.Forms.Button btnEditarNombre;
+        private System.Windows.Forms.Button btnEditarDesc;
+        private System.Windows.Forms.Button btnEditarCat;
+        private System.Windows.Forms.Button btnEditarMarca;
+        private System.Windows.Forms.Button btnEditarPrecio;
+        private System.Windows.Forms.Button btnModificarTodos;
     }
 }

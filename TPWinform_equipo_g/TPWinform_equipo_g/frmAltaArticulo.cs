@@ -32,14 +32,18 @@ namespace TPWinform_equipo_g
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
-            
+            botonesEditar(false);//--------------------!!!!!!!!!!!!!!!
+            txtHabilitados(true);//--------------------!!!!!!!!!!!!!!!
 
         }
+
         public frmAltaArticulo(Articulo articulo)
         {
             InitializeComponent();
-            Text = "Modificar articulo";
+            Text = "Editar articulo";
             this.articulo = articulo;
+            botonesEditar(true);//--------------------!!!!!!!!!!!!!!!
+            txtHabilitados(false);//--------------------!!!!!!!!!!!!!!!
             categoriaNegocio = new CategoriaNegocio();
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
@@ -80,6 +84,7 @@ namespace TPWinform_equipo_g
                 MessageBox.Show(ex.ToString());
             }
         }
+
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -256,6 +261,64 @@ namespace TPWinform_equipo_g
                 }
                 
             }
+        }
+
+        private void btnModificarTodos_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            
+            txtHabilitados(true);
+        }
+
+        private void txtHabilitados(bool habilitar)//--------------------!!!!!!!!!!!!!!!
+        {
+            txtCodigo.Enabled = habilitar;
+            txtNombre.Enabled = habilitar;
+            txtDescripcion.Enabled = habilitar;
+            cbxMarca.Enabled = habilitar;
+            cbxCategoria.Enabled = habilitar;
+            txtPrecio.Enabled = habilitar;
+
+        }
+        private void botonesEditar(bool mostrar)//--------------------!!!!!!!!!!!!!!!
+        {
+            btnModificarTodos.Visible = mostrar;
+            btnEditarCodigo.Visible = mostrar;
+            btnEditarNombre.Visible = mostrar;
+            btnEditarDesc.Visible = mostrar;
+            btnEditarMarca.Visible = mostrar;
+            btnEditarCat.Visible = mostrar;
+            btnEditarPrecio.Visible = mostrar;
+        }
+
+        private void btnEditarCodigo_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            txtCodigo.Enabled = true;
+            
+        }
+
+        private void btnEditarNombre_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            txtNombre.Enabled = true;
+        }
+
+        private void btnEditarDesc_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            txtDescripcion.Enabled = true;
+        }
+
+        private void btnEditarMarca_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            cbxMarca.Enabled = true;
+        }
+
+        private void btnEditarCat_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            cbxCategoria.Enabled = true;
+        }
+
+        private void btnEditarPrecio_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        {
+            txtPrecio.Enabled = true;
         }
     }
 }

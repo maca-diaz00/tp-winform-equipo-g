@@ -422,9 +422,9 @@
             // pbxArticulos
             // 
             this.pbxArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pbxArticulos.Location = new System.Drawing.Point(933, 111);
+            this.pbxArticulos.Location = new System.Drawing.Point(964, 89);
             this.pbxArticulos.Name = "pbxArticulos";
-            this.pbxArticulos.Size = new System.Drawing.Size(230, 200);
+            this.pbxArticulos.Size = new System.Drawing.Size(216, 187);
             this.pbxArticulos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxArticulos.TabIndex = 8;
             this.pbxArticulos.TabStop = false;
@@ -432,7 +432,7 @@
             // btnAnteriorImagen
             // 
             this.btnAnteriorImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAnteriorImagen.Location = new System.Drawing.Point(908, 202);
+            this.btnAnteriorImagen.Location = new System.Drawing.Point(939, 167);
             this.btnAnteriorImagen.Name = "btnAnteriorImagen";
             this.btnAnteriorImagen.Size = new System.Drawing.Size(19, 23);
             this.btnAnteriorImagen.TabIndex = 9;
@@ -443,7 +443,7 @@
             // btnSiguienteImagen
             // 
             this.btnSiguienteImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSiguienteImagen.Location = new System.Drawing.Point(1169, 202);
+            this.btnSiguienteImagen.Location = new System.Drawing.Point(1186, 167);
             this.btnSiguienteImagen.Name = "btnSiguienteImagen";
             this.btnSiguienteImagen.Size = new System.Drawing.Size(19, 23);
             this.btnSiguienteImagen.TabIndex = 10;
@@ -489,7 +489,7 @@
             this.lblDetalleArticulo.AutoSize = true;
             this.lblDetalleArticulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetalleArticulo.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblDetalleArticulo.Location = new System.Drawing.Point(1017, 323);
+            this.lblDetalleArticulo.Location = new System.Drawing.Point(1017, 294);
             this.lblDetalleArticulo.Name = "lblDetalleArticulo";
             this.lblDetalleArticulo.Size = new System.Drawing.Size(68, 13);
             this.lblDetalleArticulo.TabIndex = 14;
@@ -499,132 +499,127 @@
             // lblCodigoD
             // 
             this.lblCodigoD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCodigoD.AutoSize = true;
-            this.lblCodigoD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblCodigoD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblCodigoD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodigoD.Location = new System.Drawing.Point(935, 341);
+            this.lblCodigoD.Location = new System.Drawing.Point(893, 312);
             this.lblCodigoD.Name = "lblCodigoD";
-            this.lblCodigoD.Size = new System.Drawing.Size(72, 22);
+            this.lblCodigoD.Size = new System.Drawing.Size(109, 22);
             this.lblCodigoD.TabIndex = 16;
             this.lblCodigoD.Text = "Código:";
             // 
             // lblNombreD
             // 
             this.lblNombreD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNombreD.AutoSize = true;
-            this.lblNombreD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblNombreD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblNombreD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreD.Location = new System.Drawing.Point(929, 376);
+            this.lblNombreD.Location = new System.Drawing.Point(893, 347);
             this.lblNombreD.Name = "lblNombreD";
-            this.lblNombreD.Size = new System.Drawing.Size(78, 22);
+            this.lblNombreD.Size = new System.Drawing.Size(109, 22);
             this.lblNombreD.TabIndex = 17;
             this.lblNombreD.Text = "Nombre:";
             // 
             // lblDescripcionD
             // 
             this.lblDescripcionD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDescripcionD.AutoSize = true;
-            this.lblDescripcionD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblDescripcionD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblDescripcionD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescripcionD.Location = new System.Drawing.Point(898, 409);
+            this.lblDescripcionD.Location = new System.Drawing.Point(893, 388);
             this.lblDescripcionD.Name = "lblDescripcionD";
-            this.lblDescripcionD.Size = new System.Drawing.Size(109, 22);
+            this.lblDescripcionD.Size = new System.Drawing.Size(109, 47);
             this.lblDescripcionD.TabIndex = 18;
             this.lblDescripcionD.Text = "Descripción:";
             // 
             // lblMarcaD
             // 
             this.lblMarcaD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMarcaD.AutoSize = true;
-            this.lblMarcaD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblMarcaD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblMarcaD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarcaD.Location = new System.Drawing.Point(943, 445);
+            this.lblMarcaD.Location = new System.Drawing.Point(893, 451);
             this.lblMarcaD.Name = "lblMarcaD";
-            this.lblMarcaD.Size = new System.Drawing.Size(64, 22);
+            this.lblMarcaD.Size = new System.Drawing.Size(109, 22);
             this.lblMarcaD.TabIndex = 19;
             this.lblMarcaD.Text = "Marca:";
             // 
             // lblPrecioD
             // 
             this.lblPrecioD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPrecioD.AutoSize = true;
-            this.lblPrecioD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblPrecioD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblPrecioD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioD.Location = new System.Drawing.Point(941, 517);
+            this.lblPrecioD.Location = new System.Drawing.Point(893, 526);
             this.lblPrecioD.Name = "lblPrecioD";
-            this.lblPrecioD.Size = new System.Drawing.Size(66, 22);
+            this.lblPrecioD.Size = new System.Drawing.Size(109, 22);
             this.lblPrecioD.TabIndex = 20;
             this.lblPrecioD.Text = "Precio:";
             // 
             // lblCategoriaD
             // 
             this.lblCategoriaD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCategoriaD.AutoSize = true;
-            this.lblCategoriaD.BackColor = System.Drawing.SystemColors.Control;
+            this.lblCategoriaD.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.lblCategoriaD.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoriaD.Location = new System.Drawing.Point(914, 482);
+            this.lblCategoriaD.Location = new System.Drawing.Point(893, 488);
             this.lblCategoriaD.Name = "lblCategoriaD";
-            this.lblCategoriaD.Size = new System.Drawing.Size(93, 22);
+            this.lblCategoriaD.Size = new System.Drawing.Size(109, 22);
             this.lblCategoriaD.TabIndex = 21;
             this.lblCategoriaD.Text = "Categoria:";
             // 
             // lblCodigoDetalle
             // 
             this.lblCodigoDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCodigoDetalle.AutoSize = true;
+            this.lblCodigoDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblCodigoDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCodigoDetalle.Location = new System.Drawing.Point(1017, 346);
+            this.lblCodigoDetalle.Location = new System.Drawing.Point(1017, 315);
             this.lblCodigoDetalle.Name = "lblCodigoDetalle";
-            this.lblCodigoDetalle.Size = new System.Drawing.Size(0, 17);
+            this.lblCodigoDetalle.Size = new System.Drawing.Size(192, 19);
             this.lblCodigoDetalle.TabIndex = 22;
             // 
             // lblNombreDetalle
             // 
             this.lblNombreDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNombreDetalle.AutoSize = true;
+            this.lblNombreDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblNombreDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNombreDetalle.Location = new System.Drawing.Point(1017, 381);
+            this.lblNombreDetalle.Location = new System.Drawing.Point(1017, 350);
             this.lblNombreDetalle.Name = "lblNombreDetalle";
-            this.lblNombreDetalle.Size = new System.Drawing.Size(0, 17);
+            this.lblNombreDetalle.Size = new System.Drawing.Size(192, 19);
             this.lblNombreDetalle.TabIndex = 23;
             // 
             // lblDescripcionDetalle
             // 
             this.lblDescripcionDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDescripcionDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblDescripcionDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescripcionDetalle.Location = new System.Drawing.Point(1017, 412);
+            this.lblDescripcionDetalle.Location = new System.Drawing.Point(1017, 388);
             this.lblDescripcionDetalle.Name = "lblDescripcionDetalle";
-            this.lblDescripcionDetalle.Size = new System.Drawing.Size(217, 36);
+            this.lblDescripcionDetalle.Size = new System.Drawing.Size(192, 47);
             this.lblDescripcionDetalle.TabIndex = 24;
             // 
             // lblMarcaDetalle
             // 
             this.lblMarcaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblMarcaDetalle.AutoSize = true;
+            this.lblMarcaDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblMarcaDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMarcaDetalle.Location = new System.Drawing.Point(1017, 450);
+            this.lblMarcaDetalle.Location = new System.Drawing.Point(1017, 454);
             this.lblMarcaDetalle.Name = "lblMarcaDetalle";
-            this.lblMarcaDetalle.Size = new System.Drawing.Size(0, 17);
+            this.lblMarcaDetalle.Size = new System.Drawing.Size(192, 19);
             this.lblMarcaDetalle.TabIndex = 25;
             // 
             // lblCategoriaDetalle
             // 
             this.lblCategoriaDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCategoriaDetalle.AutoSize = true;
+            this.lblCategoriaDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblCategoriaDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategoriaDetalle.Location = new System.Drawing.Point(1017, 487);
+            this.lblCategoriaDetalle.Location = new System.Drawing.Point(1017, 491);
             this.lblCategoriaDetalle.Name = "lblCategoriaDetalle";
-            this.lblCategoriaDetalle.Size = new System.Drawing.Size(0, 17);
+            this.lblCategoriaDetalle.Size = new System.Drawing.Size(192, 19);
             this.lblCategoriaDetalle.TabIndex = 26;
             // 
             // lblPrecioDetalle
             // 
             this.lblPrecioDetalle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPrecioDetalle.AutoSize = true;
+            this.lblPrecioDetalle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.lblPrecioDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecioDetalle.Location = new System.Drawing.Point(1017, 522);
+            this.lblPrecioDetalle.Location = new System.Drawing.Point(1017, 526);
             this.lblPrecioDetalle.Name = "lblPrecioDetalle";
-            this.lblPrecioDetalle.Size = new System.Drawing.Size(0, 17);
+            this.lblPrecioDetalle.Size = new System.Drawing.Size(192, 19);
             this.lblPrecioDetalle.TabIndex = 27;
             // 
             // lblOcultarDetalle
@@ -633,7 +628,7 @@
             this.lblOcultarDetalle.AutoSize = true;
             this.lblOcultarDetalle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOcultarDetalle.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblOcultarDetalle.Location = new System.Drawing.Point(1017, 323);
+            this.lblOcultarDetalle.Location = new System.Drawing.Point(1017, 294);
             this.lblOcultarDetalle.Name = "lblOcultarDetalle";
             this.lblOcultarDetalle.Size = new System.Drawing.Size(90, 13);
             this.lblOcultarDetalle.TabIndex = 28;
