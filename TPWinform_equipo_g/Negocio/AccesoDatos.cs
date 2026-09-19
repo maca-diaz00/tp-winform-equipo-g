@@ -32,11 +32,11 @@ namespace Negocio
 
         public void ejecutarConsulta()
         {
-            comando.Connection = conexion;//se asigna la conexion a la bbdd
+            comando.Connection = conexion;
             try
             {
                 conexion.Open();
-                lector = comando.ExecuteReader();//a lector se le asigna la lectura traida de la bbdd de lo establecido en la consulta
+                lector = comando.ExecuteReader();
             }
             catch (Exception ex)
             {
@@ -67,13 +67,27 @@ namespace Negocio
 
         public void cerrarConexion()
         {
-            if (lector != null)// xej en caso de que hagamos un alta puede llegar a ser null xq no usamos lector y solo cierra conexion
+            if (lector != null)
             {
                 lector.Close();
             }
             conexion.Close();
 
 
+        }
+
+        public object ejecutarScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return comando.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

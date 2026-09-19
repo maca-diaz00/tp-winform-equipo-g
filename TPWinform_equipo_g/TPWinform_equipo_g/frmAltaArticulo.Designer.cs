@@ -57,6 +57,8 @@
             this.btnEditarMarca = new System.Windows.Forms.Button();
             this.btnEditarPrecio = new System.Windows.Forms.Button();
             this.btnModificarTodos = new System.Windows.Forms.Button();
+            this.btnLimpiarTxtImagen = new System.Windows.Forms.Button();
+            this.btnEditarImagenes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,7 +128,7 @@
             this.txtCodigo.Location = new System.Drawing.Point(147, 67);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(201, 20);
-            this.txtCodigo.TabIndex = 6;
+            this.txtCodigo.TabIndex = 0;
             // 
             // txtNombre
             // 
@@ -134,7 +136,7 @@
             this.txtNombre.Location = new System.Drawing.Point(147, 106);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(201, 20);
-            this.txtNombre.TabIndex = 7;
+            this.txtNombre.TabIndex = 1;
             // 
             // txtDescripcion
             // 
@@ -143,7 +145,7 @@
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(201, 69);
-            this.txtDescripcion.TabIndex = 8;
+            this.txtDescripcion.TabIndex = 2;
             // 
             // txtPrecio
             // 
@@ -151,7 +153,7 @@
             this.txtPrecio.Location = new System.Drawing.Point(147, 319);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(201, 20);
-            this.txtPrecio.TabIndex = 9;
+            this.txtPrecio.TabIndex = 5;
             // 
             // cbxMarca
             // 
@@ -160,7 +162,7 @@
             this.cbxMarca.Location = new System.Drawing.Point(147, 235);
             this.cbxMarca.Name = "cbxMarca";
             this.cbxMarca.Size = new System.Drawing.Size(201, 21);
-            this.cbxMarca.TabIndex = 10;
+            this.cbxMarca.TabIndex = 3;
             // 
             // cbxCategoria
             // 
@@ -169,7 +171,7 @@
             this.cbxCategoria.Location = new System.Drawing.Point(147, 278);
             this.cbxCategoria.Name = "cbxCategoria";
             this.cbxCategoria.Size = new System.Drawing.Size(201, 21);
-            this.cbxCategoria.TabIndex = 11;
+            this.cbxCategoria.TabIndex = 4;
             // 
             // btnAceptar
             // 
@@ -179,7 +181,7 @@
             this.btnAceptar.Location = new System.Drawing.Point(221, 451);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(110, 41);
-            this.btnAceptar.TabIndex = 12;
+            this.btnAceptar.TabIndex = 10;
             this.btnAceptar.Text = "Aceptar";
             this.btnAceptar.UseVisualStyleBackColor = false;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
@@ -192,7 +194,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(369, 451);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(110, 41);
-            this.btnCancelar.TabIndex = 13;
+            this.btnCancelar.TabIndex = 11;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -213,7 +215,7 @@
             this.txtImagen.Location = new System.Drawing.Point(147, 360);
             this.txtImagen.Name = "txtImagen";
             this.txtImagen.Size = new System.Drawing.Size(201, 20);
-            this.txtImagen.TabIndex = 15;
+            this.txtImagen.TabIndex = 6;
             this.txtImagen.TextChanged += new System.EventHandler(this.txtImagen_TextChanged);
             // 
             // pbxImagen
@@ -234,7 +236,7 @@
             this.btnEliminarImagen.Location = new System.Drawing.Point(500, 332);
             this.btnEliminarImagen.Name = "btnEliminarImagen";
             this.btnEliminarImagen.Size = new System.Drawing.Size(42, 35);
-            this.btnEliminarImagen.TabIndex = 17;
+            this.btnEliminarImagen.TabIndex = 9;
             this.btnEliminarImagen.UseVisualStyleBackColor = false;
             this.btnEliminarImagen.Click += new System.EventHandler(this.btnEliminarImagen_Click);
             // 
@@ -244,7 +246,8 @@
             this.btnAnteriorImagen.Location = new System.Drawing.Point(403, 213);
             this.btnAnteriorImagen.Name = "btnAnteriorImagen";
             this.btnAnteriorImagen.Size = new System.Drawing.Size(19, 23);
-            this.btnAnteriorImagen.TabIndex = 18;
+            this.btnAnteriorImagen.TabIndex = 7;
+            this.btnAnteriorImagen.TabStop = false;
             this.btnAnteriorImagen.Text = "<";
             this.btnAnteriorImagen.UseVisualStyleBackColor = true;
             this.btnAnteriorImagen.Click += new System.EventHandler(this.btnAnteriorImagen_Click);
@@ -255,7 +258,8 @@
             this.btnSiguienteImagen.Location = new System.Drawing.Point(628, 213);
             this.btnSiguienteImagen.Name = "btnSiguienteImagen";
             this.btnSiguienteImagen.Size = new System.Drawing.Size(19, 23);
-            this.btnSiguienteImagen.TabIndex = 19;
+            this.btnSiguienteImagen.TabIndex = 8;
+            this.btnSiguienteImagen.TabStop = false;
             this.btnSiguienteImagen.Text = ">";
             this.btnSiguienteImagen.UseVisualStyleBackColor = true;
             this.btnSiguienteImagen.Click += new System.EventHandler(this.btnSiguienteImagen_Click);
@@ -266,7 +270,7 @@
             this.btnAgregarImagen.Location = new System.Drawing.Point(354, 360);
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(21, 23);
-            this.btnAgregarImagen.TabIndex = 20;
+            this.btnAgregarImagen.TabIndex = 7;
             this.btnAgregarImagen.Text = "✓";
             this.btnAgregarImagen.UseVisualStyleBackColor = false;
             this.btnAgregarImagen.Click += new System.EventHandler(this.btnAgregarImagen_Click);
@@ -342,11 +346,34 @@
             this.btnModificarTodos.UseVisualStyleBackColor = true;
             this.btnModificarTodos.Click += new System.EventHandler(this.btnModificarTodos_Click);
             // 
+            // btnLimpiarTxtImagen
+            // 
+            this.btnLimpiarTxtImagen.BackColor = System.Drawing.Color.LavenderBlush;
+            this.btnLimpiarTxtImagen.Location = new System.Drawing.Point(381, 360);
+            this.btnLimpiarTxtImagen.Name = "btnLimpiarTxtImagen";
+            this.btnLimpiarTxtImagen.Size = new System.Drawing.Size(21, 23);
+            this.btnLimpiarTxtImagen.TabIndex = 8;
+            this.btnLimpiarTxtImagen.Text = "✕";
+            this.btnLimpiarTxtImagen.UseVisualStyleBackColor = false;
+            this.btnLimpiarTxtImagen.Click += new System.EventHandler(this.btnLimpiarTxtImagen_Click);
+            // 
+            // btnEditarImagenes
+            // 
+            this.btnEditarImagenes.Image = ((System.Drawing.Image)(resources.GetObject("btnEditarImagenes.Image")));
+            this.btnEditarImagenes.Location = new System.Drawing.Point(354, 352);
+            this.btnEditarImagenes.Name = "btnEditarImagenes";
+            this.btnEditarImagenes.Size = new System.Drawing.Size(31, 34);
+            this.btnEditarImagenes.TabIndex = 29;
+            this.btnEditarImagenes.UseVisualStyleBackColor = true;
+            this.btnEditarImagenes.Click += new System.EventHandler(this.btnEditarImagenes_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 526);
+            this.Controls.Add(this.btnEditarImagenes);
+            this.Controls.Add(this.btnLimpiarTxtImagen);
             this.Controls.Add(this.btnModificarTodos);
             this.Controls.Add(this.btnEditarPrecio);
             this.Controls.Add(this.btnEditarMarca);
@@ -415,5 +442,7 @@
         private System.Windows.Forms.Button btnEditarMarca;
         private System.Windows.Forms.Button btnEditarPrecio;
         private System.Windows.Forms.Button btnModificarTodos;
+        private System.Windows.Forms.Button btnLimpiarTxtImagen;
+        private System.Windows.Forms.Button btnEditarImagenes;
     }
 }

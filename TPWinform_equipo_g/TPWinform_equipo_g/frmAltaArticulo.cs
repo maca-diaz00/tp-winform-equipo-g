@@ -17,11 +17,12 @@ namespace TPWinform_equipo_g
 
         private CategoriaNegocio categoriaNegocio;
         private MarcaNegocio marcaNegocio;
-        private Articulo articulo=null;
+        private Articulo articulo;
         private ArticuloNegocio articuloNegocio;
         private ImagenNegocio imagenNegocio;
         private Imagen imagenAux;
         private int indiceImagen;
+        bool modificacion;
 
         
 
@@ -32,8 +33,10 @@ namespace TPWinform_equipo_g
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
-            botonesEditar(false);//--------------------!!!!!!!!!!!!!!!
-            txtHabilitados(true);//--------------------!!!!!!!!!!!!!!!
+            articulo = new Articulo();
+            botonesEditar(false);
+            txtHabilitados(true);
+            modificacion = false;
 
         }
 
@@ -42,21 +45,21 @@ namespace TPWinform_equipo_g
             InitializeComponent();
             Text = "Editar articulo";
             this.articulo = articulo;
-            botonesEditar(true);//--------------------!!!!!!!!!!!!!!!
-            txtHabilitados(false);//--------------------!!!!!!!!!!!!!!!
+            botonesEditar(true);
+            txtHabilitados(false);
             categoriaNegocio = new CategoriaNegocio();
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
+            modificacion = true;
+
 
 
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
         {
-            btnSiguienteImagen.Visible = false;
-            btnAnteriorImagen.Visible = false;
-            btnEliminarImagen.Visible = false;
+            
             
             try
             {
@@ -66,16 +69,18 @@ namespace TPWinform_equipo_g
                 cbxMarca.DataSource = marcaNegocio.listar();
                 cbxMarca.ValueMember = "Id";
                 cbxMarca.DisplayMember = "Descripcion";
+                actualizarBotonesImagenes();
 
-                if (articulo != null)
+                if (modificacion)
                 {
+                    mostrarImagen(articulo,0);
                     txtCodigo.Text = articulo.Codigo;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtNombre.Text = articulo.Nombre;
-                    //ver como encarar las imagenes
                     txtPrecio.Text = articulo.Precio.ToString();
                     cbxCategoria.SelectedValue = articulo.Categoria.Id;
                     cbxMarca.SelectedValue = articulo.Marca.Id;
+                    
                 }
             }
             catch (Exception ex)
@@ -86,47 +91,45 @@ namespace TPWinform_equipo_g
         }
 
 
+
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             
             try
             {
-                if (articulo == null)
+                if (!modificacion)
                 {
-                    articulo = new Articulo();
-                }
-                articulo.Codigo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
-                articulo.Descripcion = txtDescripcion.Text;
-                articulo.Marca = (Marca)cbxMarca.SelectedItem;
-                articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
-                articulo.Precio =decimal.Parse(txtPrecio.Text);
-                if (articulo.cantidadImagenes() == 0)
-                {
-                    articulo.agregarImagen("");
+                    articulo.Codigo = txtCodigo.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.Marca = (Marca)cbxMarca.SelectedItem;
+                    articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    if (articulo.cantidadImagenes() == 0)
+                    {
+                        articulo.agregarImagen("");
+                    }
                 }
 
-
-                /*int nuevasImagenes = nuevoArticulo.cantidadImagenes();
-                for(int i = 0; i < nuevasImagenes; i++)
-                {
-                    imagenAux = new Imagen();
-                    imagenAux.IdArticulo = nuevoArticulo.Id;
-                    imagenAux.UrlImagen = nuevoArticulo.Imagenes[i].UrlImagen;
-
-                    imagenNegocio.nuevaImagen(imagenAux);
-                }
-                */
-                /*no se como encarar esta parte porque no se como recuperar el ID que va a generar
-                la bbdd*/
-                if (articulo.Id != 0)
+                
+                if (modificacion)
                 {
                     articuloNegocio.modificarArticulo(articulo);
                     MessageBox.Show("Articulo modificado exitosamente!");
                 }
                 else
                 {
+                    int nuevasImagenes = articulo.cantidadImagenes();
                     articuloNegocio.nuevoArticulo(articulo);
+                    for(int i = 0; i < nuevasImagenes; i++)
+                    {
+                        imagenAux = new Imagen();
+                        imagenAux.IdArticulo = articulo.Id;
+                        imagenAux.UrlImagen = articulo.Imagenes[i].UrlImagen;
+
+                        imagenNegocio.nuevaImagen(imagenAux);
+                    }
                     MessageBox.Show("Articulo creado exitosamente!");
 
                 }
@@ -263,13 +266,14 @@ namespace TPWinform_equipo_g
             }
         }
 
-        private void btnModificarTodos_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnModificarTodos_Click(object sender, EventArgs e)
         {
             
             txtHabilitados(true);
+            botonesEditar(false);
         }
 
-        private void txtHabilitados(bool habilitar)//--------------------!!!!!!!!!!!!!!!
+        private void txtHabilitados(bool habilitar)
         {
             txtCodigo.Enabled = habilitar;
             txtNombre.Enabled = habilitar;
@@ -277,9 +281,11 @@ namespace TPWinform_equipo_g
             cbxMarca.Enabled = habilitar;
             cbxCategoria.Enabled = habilitar;
             txtPrecio.Enabled = habilitar;
+            txtImagen.Enabled = habilitar;
+            
 
         }
-        private void botonesEditar(bool mostrar)//--------------------!!!!!!!!!!!!!!!
+        private void botonesEditar(bool mostrar)
         {
             btnModificarTodos.Visible = mostrar;
             btnEditarCodigo.Visible = mostrar;
@@ -288,37 +294,70 @@ namespace TPWinform_equipo_g
             btnEditarMarca.Visible = mostrar;
             btnEditarCat.Visible = mostrar;
             btnEditarPrecio.Visible = mostrar;
+            btnEditarImagenes.Visible = mostrar;
+            btnAgregarImagen.Visible = mostrar;
+            btnLimpiarTxtImagen.Visible = mostrar;
+            btnEliminarImagen.Visible = mostrar;
+            btnAgregarImagen.Visible = !mostrar;
+            btnEliminarImagen.Visible = !mostrar;
+            btnLimpiarTxtImagen.Visible = !mostrar;
         }
 
-        private void btnEditarCodigo_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarCodigo_Click(object sender, EventArgs e)
         {
+            btnEditarCodigo.Visible = false;
+            
             txtCodigo.Enabled = true;
             
         }
 
-        private void btnEditarNombre_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarNombre_Click(object sender, EventArgs e)
         {
+            btnEditarNombre.Visible = false;
+            
             txtNombre.Enabled = true;
         }
 
-        private void btnEditarDesc_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarDesc_Click(object sender, EventArgs e)
         {
+            btnEditarDesc.Visible = false;
+            
             txtDescripcion.Enabled = true;
         }
 
-        private void btnEditarMarca_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarMarca_Click(object sender, EventArgs e)
         {
+            btnEditarMarca.Visible = false;
+            
             cbxMarca.Enabled = true;
         }
 
-        private void btnEditarCat_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarCat_Click(object sender, EventArgs e)
         {
+            btnEditarCat.Visible = false;
+            
             cbxCategoria.Enabled = true;
         }
 
-        private void btnEditarPrecio_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarPrecio_Click(object sender, EventArgs e)
         {
+            btnEditarPrecio.Visible = false;
             txtPrecio.Enabled = true;
         }
+
+        private void btnEditarImagenes_Click(object sender, EventArgs e)
+        {
+            btnEditarImagenes.Visible = false;
+            txtImagen.Enabled = true;
+            btnAgregarImagen.Visible = true;
+            btnLimpiarTxtImagen.Visible = true;
+            btnEliminarImagen.Visible = true;
+        }
+        private void btnLimpiarTxtImagen_Click(object sender, EventArgs e)
+        {
+            txtImagen.Text = "";
+        }
+
+
     }
 }
