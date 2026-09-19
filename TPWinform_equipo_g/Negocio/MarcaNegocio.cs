@@ -88,5 +88,63 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<Marca> filtrarMarcas(string campo,string criterio, string filtro)
+        {
+            List<Marca> listaFiltrada = new List<Marca>();
+            try
+            {
+                string consulta = "Select Id, Descripcion from MARCAS where ";
+                if (campo == "Descripcion")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "Descripcion like '%" + filtro + "'";
+                            break;
+                        case "Contiene":
+                            consulta += "Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                } else if (campo == "Id")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "Id > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "Id < " + filtro;
+                            break;
+                        case "Igual a":
+                            consulta += "Id = " + filtro;
+                            break;
+                    }
+                }
+                datos.setearConsulta(consulta);
+                datos.ejecutarConsulta();
+
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    listaFiltrada.Add(aux);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+            return listaFiltrada;
+        }
     }
 }
