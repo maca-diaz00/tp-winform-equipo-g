@@ -265,8 +265,14 @@ namespace TPWinform_equipo_g
                 frmAltaMarca.ShowDialog();
                 cargarDgv();
             }
+            else if (tipoListado == "Categoria")
+            {
+                frmAltaCategoria frmAltaCategoria = new frmAltaCategoria();
+                frmAltaCategoria.ShowDialog();
+                cargarDgv();
+            }
         }
-
+       
 
 
 
@@ -328,11 +334,17 @@ namespace TPWinform_equipo_g
             else if (tipoListado == "Marca")
             {
                 Marca marcaSeleccionada;
-                marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
                 frmAltaMarca = new frmAltaMarca(marcaSeleccionada);
                 frmAltaMarca.ShowDialog();
             }
-
+            else if (tipoListado == "Categoria")
+            {
+                Categoria categoriaSeleccionada;
+                categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
+                frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaSeleccionada);
+                frmAltaCategoria.ShowDialog();
+            }
             cargarDgv();
         }
 
