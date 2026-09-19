@@ -79,13 +79,15 @@ namespace TPWinform_equipo_g
         {
             if (dgv_BaseDatos.Visible == false || tipoListado != "Categoria")
             {
+                tipoListado = "Categoria";
+                cargarDgv();
                 dgv_BaseDatos.Visible = true;
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = true;
                 btnEditar.Visible = true;
-                tipoListado = "Categoria";
                 mostrarDetalleArticulo(false);
-                cargarDgv();
+                if (dgv_BaseDatos.Columns.Contains("Id"))
+                    dgv_BaseDatos.Columns["Id"].Visible = false;
             }
             else if (dgv_BaseDatos.Visible == true && tipoListado == "Categoria")
             {
@@ -102,13 +104,13 @@ namespace TPWinform_equipo_g
         {
             if (dgv_BaseDatos.Visible == false || tipoListado != "Marca")
             {
+                tipoListado = "Marca";
+                cargarDgv();
                 dgv_BaseDatos.Visible = true;
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = true;
                 btnEditar.Visible = true;
                 mostrarDetalleArticulo(false);
-                tipoListado = "Marca";
-                cargarDgv();
                 dgv_BaseDatos.Columns["Id"].Visible = false;
             }
             else if (dgv_BaseDatos.Visible == true && tipoListado == "Marca")
@@ -117,6 +119,7 @@ namespace TPWinform_equipo_g
                 btnAgregar.Visible = false;
                 btnEliminar.Visible = false;
                 btnEditar.Visible = false;
+                dgv_BaseDatos.Columns["Id"].Visible = false;
 
             }
 
@@ -126,22 +129,25 @@ namespace TPWinform_equipo_g
         {
             if (dgv_BaseDatos.Visible == false || tipoListado != "Articulo")
             {
+                tipoListado = "Articulo";
+                cargarDgv();
+                dgv_BaseDatos.Columns["Id"].Visible = false;
+                dgv_BaseDatos.Columns["Codigo"].Visible = false;
+                dgv_BaseDatos.Columns["Categoria"].Visible = false;
                 dgv_BaseDatos.Visible = true;
                 btnAgregar.Visible = true;
                 btnEliminar.Visible = true;
                 btnEditar.Visible = true;
-                tipoListado = "Articulo";
-                dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
+            } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
+            {
                 dgv_BaseDatos.Columns["Id"].Visible = false;
                 dgv_BaseDatos.Columns["Codigo"].Visible = false;
                 dgv_BaseDatos.Columns["Categoria"].Visible = false;
-            } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
-            {
                 dgv_BaseDatos.Visible = false;
                 btnAgregar.Visible = false;
                 btnEliminar.Visible = false;
                 btnEditar.Visible = false;
-                
+
             }
 
 
@@ -334,14 +340,17 @@ namespace TPWinform_equipo_g
         {
             if (tipoListado == "Articulo")
             {
+                dgv_BaseDatos.DataSource = null;
                 dgv_BaseDatos.DataSource = articuloNegocio.listarArticulos();
             }
             else if (tipoListado == "Categoria")
             {
+                dgv_BaseDatos.DataSource = null;
                 dgv_BaseDatos.DataSource = categoriaNegocio.listar();
             }
             else if (tipoListado == "Marca")
             {
+                dgv_BaseDatos.DataSource = null;
                 dgv_BaseDatos.DataSource = marcaNegocio.listar();
             }
         }
