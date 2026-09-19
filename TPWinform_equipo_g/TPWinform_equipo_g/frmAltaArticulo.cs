@@ -17,11 +17,12 @@ namespace TPWinform_equipo_g
 
         private CategoriaNegocio categoriaNegocio;
         private MarcaNegocio marcaNegocio;
-        private Articulo articulo=null;
+        private Articulo articulo;
         private ArticuloNegocio articuloNegocio;
         private ImagenNegocio imagenNegocio;
         private Imagen imagenAux;
         private int indiceImagen;
+        bool modificacion;
 
         
 
@@ -32,8 +33,10 @@ namespace TPWinform_equipo_g
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
-            botonesEditar(false);//--------------------!!!!!!!!!!!!!!!
-            txtHabilitados(true);//--------------------!!!!!!!!!!!!!!!
+            articulo = new Articulo();
+            botonesEditar(false);
+            txtHabilitados(true);
+            modificacion = false;
 
         }
 
@@ -42,12 +45,13 @@ namespace TPWinform_equipo_g
             InitializeComponent();
             Text = "Editar articulo";
             this.articulo = articulo;
-            botonesEditar(true);//--------------------!!!!!!!!!!!!!!!
-            txtHabilitados(false);//--------------------!!!!!!!!!!!!!!!
+            botonesEditar(true);
+            txtHabilitados(false);
             categoriaNegocio = new CategoriaNegocio();
             marcaNegocio = new MarcaNegocio();
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
+            modificacion = true;
 
 
         }
@@ -67,15 +71,17 @@ namespace TPWinform_equipo_g
                 cbxMarca.ValueMember = "Id";
                 cbxMarca.DisplayMember = "Descripcion";
 
-                if (articulo != null)
+                if (modificacion)
                 {
                     txtCodigo.Text = articulo.Codigo;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtNombre.Text = articulo.Nombre;
-                    //ver como encarar las imagenes
                     txtPrecio.Text = articulo.Precio.ToString();
                     cbxCategoria.SelectedValue = articulo.Categoria.Id;
                     cbxMarca.SelectedValue = articulo.Marca.Id;
+                    indiceImagen = articulo.cantidadImagenes();
+                    mostrarImagen(articulo,0);
+                    
                 }
             }
             catch (Exception ex)
@@ -86,46 +92,44 @@ namespace TPWinform_equipo_g
         }
 
 
+
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             
             try
             {
-                if (articulo == null)
+                if (!modificacion)
                 {
-                    articulo = new Articulo();
-                }
-                articulo.Codigo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
-                articulo.Descripcion = txtDescripcion.Text;
-                articulo.Marca = (Marca)cbxMarca.SelectedItem;
-                articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
-                articulo.Precio =decimal.Parse(txtPrecio.Text);
-                if (articulo.cantidadImagenes() == 0)
-                {
-                    articulo.agregarImagen("");
+                    articulo.Codigo = txtCodigo.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.Marca = (Marca)cbxMarca.SelectedItem;
+                    articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
+                    articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    if (articulo.cantidadImagenes() == 0)
+                    {
+                        articulo.agregarImagen("");
+                    }
                 }
 
-
-                /*int nuevasImagenes = nuevoArticulo.cantidadImagenes();
-                for(int i = 0; i < nuevasImagenes; i++)
-                {
-                    imagenAux = new Imagen();
-                    imagenAux.IdArticulo = nuevoArticulo.Id;
-                    imagenAux.UrlImagen = nuevoArticulo.Imagenes[i].UrlImagen;
-
-                    imagenNegocio.nuevaImagen(imagenAux);
-                }
-                */
-                /*no se como encarar esta parte porque no se como recuperar el ID que va a generar
-                la bbdd*/
-                if (articulo.Id != 0)
+                
+                if (modificacion)
                 {
                     articuloNegocio.modificarArticulo(articulo);
                     MessageBox.Show("Articulo modificado exitosamente!");
                 }
                 else
                 {
+                    int nuevasImagenes = articulo.cantidadImagenes();
+                    for(int i = 0; i < nuevasImagenes; i++)
+                    {
+                        imagenAux = new Imagen();
+                        imagenAux.IdArticulo = articulo.Id;
+                        imagenAux.UrlImagen = articulo.Imagenes[i].UrlImagen;
+
+                        imagenNegocio.nuevaImagen(imagenAux);
+                    }
                     articuloNegocio.nuevoArticulo(articulo);
                     MessageBox.Show("Articulo creado exitosamente!");
 
@@ -263,13 +267,13 @@ namespace TPWinform_equipo_g
             }
         }
 
-        private void btnModificarTodos_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnModificarTodos_Click(object sender, EventArgs e)
         {
             
             txtHabilitados(true);
         }
 
-        private void txtHabilitados(bool habilitar)//--------------------!!!!!!!!!!!!!!!
+        private void txtHabilitados(bool habilitar)
         {
             txtCodigo.Enabled = habilitar;
             txtNombre.Enabled = habilitar;
@@ -279,7 +283,7 @@ namespace TPWinform_equipo_g
             txtPrecio.Enabled = habilitar;
 
         }
-        private void botonesEditar(bool mostrar)//--------------------!!!!!!!!!!!!!!!
+        private void botonesEditar(bool mostrar)
         {
             btnModificarTodos.Visible = mostrar;
             btnEditarCodigo.Visible = mostrar;
@@ -290,33 +294,33 @@ namespace TPWinform_equipo_g
             btnEditarPrecio.Visible = mostrar;
         }
 
-        private void btnEditarCodigo_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarCodigo_Click(object sender, EventArgs e)
         {
             txtCodigo.Enabled = true;
             
         }
 
-        private void btnEditarNombre_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarNombre_Click(object sender, EventArgs e)
         {
             txtNombre.Enabled = true;
         }
 
-        private void btnEditarDesc_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarDesc_Click(object sender, EventArgs e)
         {
             txtDescripcion.Enabled = true;
         }
 
-        private void btnEditarMarca_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarMarca_Click(object sender, EventArgs e)
         {
             cbxMarca.Enabled = true;
         }
 
-        private void btnEditarCat_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarCat_Click(object sender, EventArgs e)
         {
             cbxCategoria.Enabled = true;
         }
 
-        private void btnEditarPrecio_Click(object sender, EventArgs e)//--------------------!!!!!!!!!!!!!!!
+        private void btnEditarPrecio_Click(object sender, EventArgs e)
         {
             txtPrecio.Enabled = true;
         }

@@ -11,14 +11,14 @@ namespace Negocio
 
     public class ImagenNegocio
     {
-        private AccesoDatos datos = new AccesoDatos();
+        
         public void nuevaImagen(Imagen nuevaImagen)
         {
-
+            AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("Insert to IMAGENES (IdArticulo,ImagenUrl) values (@idArticulo, @url");
+                datos.setearConsulta("Insert into IMAGENES (IdArticulo,ImagenUrl) values (@idArticulo, @url)");
                 datos.setearParametro("@idArticulo", nuevaImagen.IdArticulo);
                 datos.setearParametro("@url", nuevaImagen.UrlImagen);
 
@@ -37,5 +37,13 @@ namespace Negocio
 
 
         }
+
+       /* public List<Imagen> listarImagenes(int idArticulo)
+        {
+            datos.setearConsulta("select ImagenUrl from IMAGENES where @idArticulo=IdArticulo");
+            datos.setearParametro("@idArticulo", idArticulo);
+
+        }
+       */
     }
 }
