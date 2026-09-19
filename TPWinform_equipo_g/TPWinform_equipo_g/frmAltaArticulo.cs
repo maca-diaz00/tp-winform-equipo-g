@@ -54,13 +54,12 @@ namespace TPWinform_equipo_g
             modificacion = true;
 
 
+
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
         {
-            btnSiguienteImagen.Visible = false;
-            btnAnteriorImagen.Visible = false;
-            btnEliminarImagen.Visible = false;
+            
             
             try
             {
@@ -70,17 +69,17 @@ namespace TPWinform_equipo_g
                 cbxMarca.DataSource = marcaNegocio.listar();
                 cbxMarca.ValueMember = "Id";
                 cbxMarca.DisplayMember = "Descripcion";
+                actualizarBotonesImagenes();
 
                 if (modificacion)
                 {
+                    mostrarImagen(articulo,0);
                     txtCodigo.Text = articulo.Codigo;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtNombre.Text = articulo.Nombre;
                     txtPrecio.Text = articulo.Precio.ToString();
                     cbxCategoria.SelectedValue = articulo.Categoria.Id;
                     cbxMarca.SelectedValue = articulo.Marca.Id;
-                    indiceImagen = articulo.cantidadImagenes();
-                    mostrarImagen(articulo,0);
                     
                 }
             }
@@ -122,6 +121,7 @@ namespace TPWinform_equipo_g
                 else
                 {
                     int nuevasImagenes = articulo.cantidadImagenes();
+                    articuloNegocio.nuevoArticulo(articulo);
                     for(int i = 0; i < nuevasImagenes; i++)
                     {
                         imagenAux = new Imagen();
@@ -130,7 +130,6 @@ namespace TPWinform_equipo_g
 
                         imagenNegocio.nuevaImagen(imagenAux);
                     }
-                    articuloNegocio.nuevoArticulo(articulo);
                     MessageBox.Show("Articulo creado exitosamente!");
 
                 }
@@ -271,6 +270,7 @@ namespace TPWinform_equipo_g
         {
             
             txtHabilitados(true);
+            botonesEditar(false);
         }
 
         private void txtHabilitados(bool habilitar)
@@ -281,6 +281,8 @@ namespace TPWinform_equipo_g
             cbxMarca.Enabled = habilitar;
             cbxCategoria.Enabled = habilitar;
             txtPrecio.Enabled = habilitar;
+            txtImagen.Enabled = habilitar;
+            
 
         }
         private void botonesEditar(bool mostrar)
@@ -292,37 +294,70 @@ namespace TPWinform_equipo_g
             btnEditarMarca.Visible = mostrar;
             btnEditarCat.Visible = mostrar;
             btnEditarPrecio.Visible = mostrar;
+            btnEditarImagenes.Visible = mostrar;
+            btnAgregarImagen.Visible = mostrar;
+            btnLimpiarTxtImagen.Visible = mostrar;
+            btnEliminarImagen.Visible = mostrar;
+            btnAgregarImagen.Visible = !mostrar;
+            btnEliminarImagen.Visible = !mostrar;
+            btnLimpiarTxtImagen.Visible = !mostrar;
         }
 
         private void btnEditarCodigo_Click(object sender, EventArgs e)
         {
+            btnEditarCodigo.Visible = false;
+            
             txtCodigo.Enabled = true;
             
         }
 
         private void btnEditarNombre_Click(object sender, EventArgs e)
         {
+            btnEditarNombre.Visible = false;
+            
             txtNombre.Enabled = true;
         }
 
         private void btnEditarDesc_Click(object sender, EventArgs e)
         {
+            btnEditarDesc.Visible = false;
+            
             txtDescripcion.Enabled = true;
         }
 
         private void btnEditarMarca_Click(object sender, EventArgs e)
         {
+            btnEditarMarca.Visible = false;
+            
             cbxMarca.Enabled = true;
         }
 
         private void btnEditarCat_Click(object sender, EventArgs e)
         {
+            btnEditarCat.Visible = false;
+            
             cbxCategoria.Enabled = true;
         }
 
         private void btnEditarPrecio_Click(object sender, EventArgs e)
         {
+            btnEditarPrecio.Visible = false;
             txtPrecio.Enabled = true;
         }
+
+        private void btnEditarImagenes_Click(object sender, EventArgs e)
+        {
+            btnEditarImagenes.Visible = false;
+            txtImagen.Enabled = true;
+            btnAgregarImagen.Visible = true;
+            btnLimpiarTxtImagen.Visible = true;
+            btnEliminarImagen.Visible = true;
+        }
+        private void btnLimpiarTxtImagen_Click(object sender, EventArgs e)
+        {
+            txtImagen.Text = "";
+        }
+
+
     }
 }

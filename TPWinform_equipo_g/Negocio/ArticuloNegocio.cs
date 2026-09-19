@@ -11,12 +11,11 @@ namespace Negocio
 {
     public class ArticuloNegocio
     {
-        private AccesoDatos datos = new AccesoDatos();
 
         public List<Articulo> listarArticulos()
         {
             List<Articulo> lista = new List<Articulo>();
-
+            AccesoDatos datos = new AccesoDatos();
 
 
             try
@@ -74,7 +73,7 @@ namespace Negocio
 
         public void nuevoArticulo(Articulo nuevo)
         {
-
+            AccesoDatos datos = new AccesoDatos();
 
             try
             {
@@ -103,7 +102,7 @@ namespace Negocio
 
         public void modificarArticulo(Articulo modificado)
         {
-
+            AccesoDatos datos = new AccesoDatos();
 
             try
             {
@@ -129,6 +128,29 @@ namespace Negocio
             }
 
 
+
+        }
+
+        public void eliminarArticulo(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Delete from ARTICULOS Where @id=Id");
+                datos.setearParametro("@id", articulo.Id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 
         }
 
