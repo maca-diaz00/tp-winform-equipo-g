@@ -686,11 +686,13 @@
             // 
             // txtFiltroBaseDatos
             // 
+            this.txtFiltroBaseDatos.Enabled = false;
             this.txtFiltroBaseDatos.Location = new System.Drawing.Point(44, 267);
             this.txtFiltroBaseDatos.Name = "txtFiltroBaseDatos";
             this.txtFiltroBaseDatos.Size = new System.Drawing.Size(100, 20);
             this.txtFiltroBaseDatos.TabIndex = 34;
             this.txtFiltroBaseDatos.Visible = false;
+            this.txtFiltroBaseDatos.TextChanged += new System.EventHandler(this.txtFiltroBaseDatos_TextChanged);
             // 
             // frmPrincipal
             // 

@@ -11,7 +11,7 @@ namespace Negocio
 {
     public class ArticuloNegocio
     {
-
+   
         public List<Articulo> listarArticulos()
         {
             List<Articulo> lista = new List<Articulo>();

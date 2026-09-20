@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using Dominio;
 
 
@@ -96,7 +97,7 @@ namespace Negocio
             {
                 string consulta = "Select Id, Descripcion from MARCAS where ";
                 if (campo == "Nombre")
-                {
+                { 
                     switch (criterio)
                     {
                         case "Comienza con":
@@ -111,6 +112,7 @@ namespace Negocio
                     }
                 } else if (campo == "Id")
                 {
+
                     switch (criterio)
                     {
                         case "Mayor a":

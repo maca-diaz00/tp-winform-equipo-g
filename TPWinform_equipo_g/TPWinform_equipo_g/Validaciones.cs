@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
+using Negocio;
 
 namespace TPWinform_equipo_g
 {
@@ -56,6 +58,16 @@ namespace TPWinform_equipo_g
                 return false;
         }
 
-
+        public bool existeMarca(int idMarca, List<Marca> lista)
+        {
+            foreach (Marca item in lista)
+            {
+                if (item.Id == idMarca)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
