@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Dominio;
 using Negocio;
 
+
 namespace TPWinform_equipo_g
 {
     public partial class frmAltaArticulo : Form
@@ -23,6 +24,7 @@ namespace TPWinform_equipo_g
         private Imagen imagenAux;
         private int indiceImagen;
         bool modificacion;
+        private Validaciones validar;
 
         
 
@@ -37,7 +39,7 @@ namespace TPWinform_equipo_g
             botonesEditar(false);
             txtHabilitados(true);
             modificacion = false;
-
+            
         }
 
         public frmAltaArticulo(Articulo articulo)
@@ -66,9 +68,12 @@ namespace TPWinform_equipo_g
                 cbxCategoria.DataSource = categoriaNegocio.listar();
                 cbxCategoria.ValueMember = "Id";
                 cbxCategoria.DisplayMember = "Descripcion";
+                cbxCategoria.SelectedIndex = -1;
                 cbxMarca.DataSource = marcaNegocio.listar();
                 cbxMarca.ValueMember = "Id";
                 cbxMarca.DisplayMember = "Descripcion";
+                cbxMarca.SelectedIndex = -1;
+
                 actualizarBotonesImagenes();
 
                 if (modificacion)
