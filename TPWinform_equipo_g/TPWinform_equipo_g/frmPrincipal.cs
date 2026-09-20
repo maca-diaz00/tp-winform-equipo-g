@@ -318,6 +318,11 @@ namespace TPWinform_equipo_g
             }
             else if (tipoListado == "Marca")
             {
+                if (dgv_BaseDatos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una marca para editar");
+                    return;
+                }
                 Marca marcaSeleccionada;
                 marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
                 frmAltaMarca = new frmAltaMarca(marcaSeleccionada);
