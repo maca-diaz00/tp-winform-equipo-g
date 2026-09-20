@@ -111,5 +111,39 @@ namespace TPWinform_equipo_g
         {
             Close();
         }
+
+
+
+
+        //GridView para mostrar categorias existentes
+
+        private void mostrarCategorias(bool mostrar)
+        {
+            dgvCategorias.Visible = mostrar;
+            if (mostrar)
+            {
+                lblCategoriasExistentes.Visible = false;
+            }
+            else
+            {
+                lblCategoriasExistentes.Visible = true;
+            }
+        }   
+
+        // Boton mostrar categorias existentes
+        private void lblCategoriasExistentes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lista = categoriaNegocio.listar();
+                dgvCategorias.DataSource = lista;
+                dgvCategorias.Columns["Id"].Visible = false;
+                dgvCategorias.Columns["Descripcion"].HeaderText = "Nombre de la categoría";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

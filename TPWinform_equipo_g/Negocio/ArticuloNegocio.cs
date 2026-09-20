@@ -253,6 +253,20 @@ namespace Negocio
 
 
         }
+
+        public int listarPorCategoria(int idCategoria)
+        {
+            return 0;
+        }
+        public int eliminarArticulo()
+        {
+            return 0;
+        }
+
+        public void eliminarArticulo(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

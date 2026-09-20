@@ -10,9 +10,8 @@ namespace Dominio
     public class Categoria
     {
         public int Id { get; set; }
-        [DisplayName("Nombre")]
+        [DisplayName("Categoría")]
         public string Descripcion { get; set; }
-
         public override string ToString()
         {
             return Descripcion;

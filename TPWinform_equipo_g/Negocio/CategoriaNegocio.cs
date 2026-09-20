@@ -79,6 +79,43 @@ namespace Negocio
             }
         }
 
+        public void eliminarConArticulos(int idCategoria)
+        {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            // Obtener todos los artículos y eliminar los que pertenecen a la categoría
+            List<Articulo> articulosAsociados = articuloNegocio.listarArticulos();
+
+            foreach (Articulo art in articulosAsociados)
+            {
+                if (art.Categoria != null && art.Categoria.Id == idCategoria)
+                {
+                    // eliminarArticulo(Articulo) elimina sus imágenes internamente si corresponde
+                    articuloNegocio.eliminarArticulo(art);
+                }
+            }
+
+            // luego se elimina la categoría
+            eliminarCategoria(idCategoria);
+        }
+        public void eliminarCategoria(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("Delete from CATEGORIAS where Id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public List<Categoria> filtrarCategorias(string campo, string criterio, string filtro)
         {
             List<Categoria> listaCategorias = new List<Categoria>();

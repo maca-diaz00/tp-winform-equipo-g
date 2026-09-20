@@ -24,9 +24,9 @@ namespace TPWinform_equipo_g
         private Imagen imagenAux;
         private int indiceImagen;
         bool modificacion;
-        private Validaciones validar;
 
-        
+
+
 
         public frmAltaArticulo()
         {
@@ -39,8 +39,9 @@ namespace TPWinform_equipo_g
             botonesEditar(false);
             txtHabilitados(true);
             modificacion = false;
-            
+
         }
+
 
         public frmAltaArticulo(Articulo articulo)
         {

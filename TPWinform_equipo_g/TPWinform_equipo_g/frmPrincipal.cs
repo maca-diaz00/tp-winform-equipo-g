@@ -324,11 +324,11 @@ namespace TPWinform_equipo_g
                 frmAltaMarca.ShowDialog();
             }
             else if (tipoListado == "Categoria")
+
             {
-                //Categoria categoriaSeleccionada;
-                //categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
-                //frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaActual);
-                //frmAltaCategoria.ShowDialog();
+                Categoria categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
+                frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaSeleccionada);
+                frmAltaCategoria.ShowDialog();
             }
             cargarDgv();
         }
@@ -426,6 +426,35 @@ namespace TPWinform_equipo_g
                         marcaNegocio.eliminarMarca(marcaSeleccionada);
                         cargarDgv();
                     }
+                    else if (tipoListado == "Categoria")
+                    {
+                        Categoria categoriaSeleccionada;
+                        if (dgv_BaseDatos.CurrentRow == null)
+                        {
+                            MessageBox.Show("Seleccione una categoria para eliminar");
+                            return;
+                        }
+                        else if (dgv_BaseDatos.CurrentRow != null)
+                        {   
+                            categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                            int cantidadArticulos = articuloNegocio.listarPorCategoria(categoriaSeleccionada.Id);
+                            if (cantidadArticulos > 0)
+                            {
+                                DialogResult resultado = MessageBox.Show("La categoria tiene articulos asociados. Si la elimina se borrarán también los articulos asociados.", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (resultado == DialogResult.No)
+                                {
+                                    return;
+                                }
+                                else if (resultado == DialogResult.Yes)
+                                {
+                                    articuloNegocio.eliminarArticulo(categoriaSeleccionada.Id);
+                                    categoriaNegocio.eliminarCategoria(categoriaSeleccionada.Id);
+                                    cargarDgv();
+                                }
+                            }
+                            
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -433,22 +462,7 @@ namespace TPWinform_equipo_g
 
                 throw ex;
             }
-            try
-            {
-                if (tipoListado == "Categoria")
-                {
-                    //DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminarla categoria, " + categoriaSeleccionada.Descripcion + "?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                    Categoria categoriaSeleccionada;
-                    categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
-                    //categoriaNegocio.eliminarCategoria(categoriaSeleccionada);
-                    cargarDgv();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
 
         }
 
