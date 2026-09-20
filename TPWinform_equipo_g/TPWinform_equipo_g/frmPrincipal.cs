@@ -124,7 +124,7 @@ namespace TPWinform_equipo_g
             } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
             {
                 mostrarDgvYBtnABM(false);
-                mostrarFiltroBD(tipoListado, true);
+                mostrarFiltroBD(tipoListado, false);
 
             }
 
