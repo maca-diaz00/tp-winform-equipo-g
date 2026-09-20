@@ -79,6 +79,66 @@ namespace Negocio
             }
         }
 
+        public List<Categoria> filtrarCategorias(string campo, string criterio, string filtro)
+        {
+            List<Categoria> listaCategorias = new List<Categoria>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "Select Id, Descripcion from CATEGORIAS where ";
+                if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Empieza con":
+                            consulta += "Descripcion like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "Descripcion like '%" + filtro + "'";
+                            break;
+                        case "Contiene":
+                            consulta += "Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Id")
+                {
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "Id > " + filtro;
+                            break;
+                        case "Menor a":
+                            consulta += "Id < " + filtro;
+                            break;
+                        case "Igual a":
+                            consulta += "Id = " + filtro;
+                            break;
+                    }
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarConsulta();
+                while (datos.Lector.Read())
+                {
+                    Categoria aux = new Categoria();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    listaCategorias.Add(aux);
+                }
+
+                return listaCategorias;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

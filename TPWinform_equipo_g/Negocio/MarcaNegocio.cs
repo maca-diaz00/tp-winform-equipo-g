@@ -95,7 +95,7 @@ namespace Negocio
             try
             {
                 string consulta = "Select Id, Descripcion from MARCAS where ";
-                if (campo == "Descripcion")
+                if (campo == "Nombre")
                 {
                     switch (criterio)
                     {
@@ -145,6 +145,28 @@ namespace Negocio
                 datos.cerrarConexion();
             }
             return listaFiltrada;
+        }
+        public void eliminarMarca(Marca marca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Delete from MARCAS Where @id=Id");
+                datos.setearParametro("@id", marca.Id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }

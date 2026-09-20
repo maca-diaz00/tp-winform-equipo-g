@@ -74,17 +74,21 @@ namespace TPWinform_equipo_g
 
         private void bt_Categoria_Click(object sender, EventArgs e)
         {
+            
             if (dgv_BaseDatos.Visible == false || tipoListado != "Categoria")
             {
+                
                 tipoListado = "Categoria";
                 cargarDgv();
                 mostrarDgvYBtnABM(true);
                 mostrarDetalleArticulo(false);
-                
+                mostrarFiltroBD(tipoListado, true);
+
             }
             else if (dgv_BaseDatos.Visible == true && tipoListado == "Categoria")
             {
                 mostrarDgvYBtnABM(false);
+                mostrarFiltroBD(tipoListado, false);
 
             }
 
@@ -98,12 +102,13 @@ namespace TPWinform_equipo_g
                 cargarDgv();
                 mostrarDgvYBtnABM(true);
                 mostrarDetalleArticulo(false);
-                
+                mostrarFiltroBD(tipoListado, true);
+
             }
             else if (dgv_BaseDatos.Visible == true && tipoListado == "Marca")
             {
                 mostrarDgvYBtnABM(false);
-
+                mostrarFiltroBD(tipoListado, false);
             }
 
         }
@@ -115,9 +120,11 @@ namespace TPWinform_equipo_g
                 tipoListado = "Articulo";
                 cargarDgv();
                 mostrarDgvYBtnABM(true);
+                mostrarFiltroBD(tipoListado, true);
             } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
             {
                 mostrarDgvYBtnABM(false);
+                mostrarFiltroBD(tipoListado, true);
 
             }
 
@@ -176,7 +183,7 @@ namespace TPWinform_equipo_g
                 indiceImagen = 0;
                 actualizarBotonesImagenes();
                 mostrarImagen(articuloActual, indiceImagen);
-            }
+            } 
         }
 
 
@@ -296,7 +303,9 @@ namespace TPWinform_equipo_g
 
         private void lblBorrarBusqueda_Click(object sender, EventArgs e)
         {
-
+            txtFiltroBaseDatos.Text = ""; 
+           
+            cargarDgv();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -405,6 +414,18 @@ namespace TPWinform_equipo_g
                         pbxArticulos = null;
                         cargarDgv();
                     }
+                    else if (tipoListado == "Marca")
+                    {
+                        Marca marcaSeleccionada;
+                        if (dgv_BaseDatos.CurrentRow == null)
+                        {
+                            MessageBox.Show("Seleccione una marca para eliminar");
+                            return;
+                        }
+                        marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                        marcaNegocio.eliminarMarca(marcaSeleccionada);
+                        cargarDgv();
+                    }
                 }
             }
             catch (Exception ex)
@@ -413,6 +434,108 @@ namespace TPWinform_equipo_g
                 throw ex;
             }
         }
-    }
 
+        private void mostrarFiltroBD(string tipolistado, bool visible)
+        {
+            string opcion = tipolistado;
+            cbCriterio.SelectedIndex = -1;
+            txtFiltroBaseDatos.Text = "";
+            switch (opcion)
+            {
+                case "Articulo":
+                    lblColumna.Visible = visible;
+                    cbColumna.Visible = visible;
+                    cbColumna.Items.Clear();
+                    cbColumna.Items.Add("Nombre");
+                    cbColumna.Items.Add("Marca");
+                    cbColumna.Items.Add("Precio");
+                    lblCriterio.Visible = visible;
+                    cbCriterio.Visible = visible;
+                    bt_Buscar.Visible = visible;
+                    txtFiltroBaseDatos.Visible = visible;
+                    lblBorrarBusqueda.Visible = visible;
+                    break;
+                case "Marca":
+                    lblColumna.Visible = visible;
+                    cbColumna.Visible = visible;
+                    cbColumna.Items.Clear();
+                    cbColumna.Items.Add("Id");
+                    cbColumna.Items.Add("Nombre");
+                    lblCriterio.Visible = visible;
+                    cbCriterio.Visible = visible;
+                    bt_Buscar.Visible = visible;
+                    txtFiltroBaseDatos.Visible = visible;
+                    lblBorrarBusqueda.Visible = visible;
+
+                    break;
+                case "Categoria":
+                    lblColumna.Visible = visible;
+                    cbColumna.Visible = visible;
+                    cbColumna.Items.Clear();
+                    cbColumna.Items.Add("Id");
+                    cbColumna.Items.Add("Nombre");
+                    lblCriterio.Visible = visible;
+                    cbCriterio.Visible = visible;
+                    bt_Buscar.Visible = visible;
+                    txtFiltroBaseDatos.Visible = visible;
+                    lblBorrarBusqueda.Visible = visible;
+
+                    break;
+            }
+        }
+
+
+        private void bt_Buscar_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                string campo = cbColumna.SelectedItem.ToString();
+                string criterio = cbCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroBaseDatos.Text;
+                if (tipoListado == "Articulo")
+                {
+                    dgv_BaseDatos.DataSource = articuloNegocio.filtrarArticulos(campo, criterio, filtro);
+                }
+                else if (tipoListado == "Marca")
+                {
+                    dgv_BaseDatos.DataSource = marcaNegocio.filtrarMarcas(campo, criterio, filtro);
+                }
+                else if (tipoListado == "Categoria")
+                {
+                    dgv_BaseDatos.DataSource = categoriaNegocio.filtrarCategorias(campo, criterio, filtro);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+        private void cbColumna_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (cbColumna.SelectedItem.ToString() == "Precio" || cbColumna.SelectedItem.ToString() == "Id")
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Mayor a");
+                cbCriterio.Items.Add("Menor a");
+                cbCriterio.Items.Add("Igual a");
+            }
+            else
+            {
+                cbCriterio.Items.Clear();
+                cbCriterio.Items.Add("Comienza con");
+                cbCriterio.Items.Add("Termina con");
+                cbCriterio.Items.Add("Contiene");
+            }
+        }
+    }
 }
+
+
+
+
+
+

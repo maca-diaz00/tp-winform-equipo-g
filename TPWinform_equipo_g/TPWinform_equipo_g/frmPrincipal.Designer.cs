@@ -86,6 +86,11 @@
             this.lblCategoriaDetalle = new System.Windows.Forms.Label();
             this.lblPrecioDetalle = new System.Windows.Forms.Label();
             this.lblBorrarBusqueda = new System.Windows.Forms.Label();
+            this.lblColumna = new System.Windows.Forms.Label();
+            this.lblCriterio = new System.Windows.Forms.Label();
+            this.cbColumna = new System.Windows.Forms.ComboBox();
+            this.cbCriterio = new System.Windows.Forms.ComboBox();
+            this.txtFiltroBaseDatos = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_BaseDatos)).BeginInit();
@@ -346,12 +351,14 @@
             this.bt_Buscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bt_Buscar.BackColor = System.Drawing.Color.LightGray;
             this.bt_Buscar.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bt_Buscar.Location = new System.Drawing.Point(1083, 32);
+            this.bt_Buscar.Location = new System.Drawing.Point(80, 294);
             this.bt_Buscar.Name = "bt_Buscar";
             this.bt_Buscar.Size = new System.Drawing.Size(86, 20);
             this.bt_Buscar.TabIndex = 2;
             this.bt_Buscar.Text = "Buscar";
             this.bt_Buscar.UseVisualStyleBackColor = false;
+            this.bt_Buscar.Visible = false;
+            this.bt_Buscar.Click += new System.EventHandler(this.bt_Buscar_Click_1);
             // 
             // bt_Categoria
             // 
@@ -392,7 +399,7 @@
             // txt_Buscador
             // 
             this.txt_Buscador.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_Buscador.Location = new System.Drawing.Point(764, 32);
+            this.txt_Buscador.Location = new System.Drawing.Point(721, 43);
             this.txt_Buscador.Name = "txt_Buscador";
             this.txt_Buscador.Size = new System.Drawing.Size(291, 20);
             this.txt_Buscador.TabIndex = 6;
@@ -628,19 +635,73 @@
             this.lblBorrarBusqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBorrarBusqueda.AutoSize = true;
             this.lblBorrarBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBorrarBusqueda.Location = new System.Drawing.Point(1061, 33);
+            this.lblBorrarBusqueda.Location = new System.Drawing.Point(150, 272);
             this.lblBorrarBusqueda.Name = "lblBorrarBusqueda";
             this.lblBorrarBusqueda.Size = new System.Drawing.Size(16, 15);
             this.lblBorrarBusqueda.TabIndex = 29;
             this.lblBorrarBusqueda.Text = "X";
+            this.lblBorrarBusqueda.Visible = false;
             this.lblBorrarBusqueda.Click += new System.EventHandler(this.lblBorrarBusqueda_Click);
+            // 
+            // lblColumna
+            // 
+            this.lblColumna.AutoSize = true;
+            this.lblColumna.Location = new System.Drawing.Point(44, 155);
+            this.lblColumna.Name = "lblColumna";
+            this.lblColumna.Size = new System.Drawing.Size(48, 13);
+            this.lblColumna.TabIndex = 30;
+            this.lblColumna.Text = "Columna";
+            this.lblColumna.Visible = false;
+            // 
+            // lblCriterio
+            // 
+            this.lblCriterio.AutoSize = true;
+            this.lblCriterio.Location = new System.Drawing.Point(44, 211);
+            this.lblCriterio.Name = "lblCriterio";
+            this.lblCriterio.Size = new System.Drawing.Size(39, 13);
+            this.lblCriterio.TabIndex = 31;
+            this.lblCriterio.Text = "Criterio";
+            this.lblCriterio.Visible = false;
+            // 
+            // cbColumna
+            // 
+            this.cbColumna.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbColumna.FormattingEnabled = true;
+            this.cbColumna.Location = new System.Drawing.Point(44, 171);
+            this.cbColumna.Name = "cbColumna";
+            this.cbColumna.Size = new System.Drawing.Size(121, 21);
+            this.cbColumna.TabIndex = 32;
+            this.cbColumna.Visible = false;
+            this.cbColumna.SelectedIndexChanged += new System.EventHandler(this.cbColumna_SelectedIndexChanged_1);
+            // 
+            // cbCriterio
+            // 
+            this.cbCriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCriterio.FormattingEnabled = true;
+            this.cbCriterio.Location = new System.Drawing.Point(44, 227);
+            this.cbCriterio.Name = "cbCriterio";
+            this.cbCriterio.Size = new System.Drawing.Size(121, 21);
+            this.cbCriterio.TabIndex = 33;
+            this.cbCriterio.Visible = false;
+            // 
+            // txtFiltroBaseDatos
+            // 
+            this.txtFiltroBaseDatos.Location = new System.Drawing.Point(44, 267);
+            this.txtFiltroBaseDatos.Name = "txtFiltroBaseDatos";
+            this.txtFiltroBaseDatos.Size = new System.Drawing.Size(100, 20);
+            this.txtFiltroBaseDatos.TabIndex = 34;
+            this.txtFiltroBaseDatos.Visible = false;
             // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1234, 582);
-            this.Controls.Add(this.lblBorrarBusqueda);
+            this.Controls.Add(this.txtFiltroBaseDatos);
+            this.Controls.Add(this.cbCriterio);
+            this.Controls.Add(this.cbColumna);
+            this.Controls.Add(this.lblCriterio);
+            this.Controls.Add(this.lblColumna);
             this.Controls.Add(this.lblPrecioDetalle);
             this.Controls.Add(this.lblCategoriaDetalle);
             this.Controls.Add(this.lblMarcaDetalle);
@@ -668,6 +729,7 @@
             this.Controls.Add(this.bt_Buscar);
             this.Controls.Add(this.pb_Logo);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.lblBorrarBusqueda);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(1448, 700);
@@ -746,6 +808,11 @@
         private System.Windows.Forms.Label lblCategoriaDetalle;
         private System.Windows.Forms.Label lblPrecioDetalle;
         private System.Windows.Forms.Label lblBorrarBusqueda;
+        private System.Windows.Forms.Label lblColumna;
+        private System.Windows.Forms.Label lblCriterio;
+        private System.Windows.Forms.ComboBox cbColumna;
+        private System.Windows.Forms.ComboBox cbCriterio;
+        private System.Windows.Forms.TextBox txtFiltroBaseDatos;
     }
 }
 

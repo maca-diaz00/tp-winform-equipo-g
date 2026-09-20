@@ -17,6 +17,7 @@ namespace TPWinform_equipo_g
         private MarcaNegocio marcaNegocio;
         private Marca marca = null;
         private List<Marca> lista;
+        bool bModificar = false;
         public frmAltaMarca()
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace TPWinform_equipo_g
             lista = new List<Marca>();
             lista = marcaNegocio.listar();
             Text = "Modificar marca";
+            bModificar = true;
 
         }
 
@@ -54,6 +56,7 @@ namespace TPWinform_equipo_g
         {
             bool bExiste = false;
 
+            
             foreach (Marca item in lista)
             {
                 if (item.Descripcion.ToUpper() == txtNombre.Text.ToUpper())
@@ -76,21 +79,19 @@ namespace TPWinform_equipo_g
 
                     try
                     {
-
-                        marca.Descripcion = txtNombre.Text;
-                        if (marca.Id != 0)
+                            marca.Descripcion = txtNombre.Text;
+                        if (!bModificar)
+                        {
+                            marcaNegocio.nuevaMarca(marca);
+                            MessageBox.Show("Marca agregada exitosamente!");
+                            Close();
+                        } else
                         {
                             marcaNegocio.modificarMarca(marca);
                             MessageBox.Show("Marca modificada exitosamente!");
                             Close();
                            
-                        } else
-                        {
-
-                            marcaNegocio.modificarMarca(marca);
-                            MessageBox.Show("Marca modificada exitosamente!");
-                            Close();
-                        }
+                        } 
 
                     }
                     catch (Exception ex)
