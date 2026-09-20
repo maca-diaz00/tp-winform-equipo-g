@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -331,9 +332,17 @@ namespace TPWinform_equipo_g
             else if (tipoListado == "Categoria")
 
             {
-                Categoria categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
-                frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaSeleccionada);
-                frmAltaCategoria.ShowDialog();
+                
+                if (dgv_BaseDatos.CurrentRow == null)
+                {
+                    MessageBox.Show("Seleccione una categoria a editar");
+                }
+                else
+                {   Categoria categoriaSeleccionada;
+                    categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                    frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaSeleccionada);
+                    frmAltaCategoria.ShowDialog();
+                }
             }
             cargarDgv();
         }
@@ -439,25 +448,46 @@ namespace TPWinform_equipo_g
                             MessageBox.Show("Seleccione una categoria para eliminar");
                             return;
                         }
-                        else if (dgv_BaseDatos.CurrentRow != null)
-                        {   
-                            categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
-                            int cantidadArticulos = articuloNegocio.listarPorCategoria(categoriaSeleccionada.Id);
-                            if (cantidadArticulos > 0)
+
+                        categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                        // Ajusta 'id' o 'Id' según tu clase Categoria
+                        List<Articulo> articulosAsociados = articuloNegocio.listarArticulosId(categoriaSeleccionada.Id);
+
+                        if (articulosAsociados != null && articulosAsociados.Count > 0)
+                        {
+                            DialogResult resultado = MessageBox.Show(
+                                "Hay " + articulosAsociados.Count + " artículos en esa categoría. Si borras la categoría también se borrarán dichos artículos, ¿deseas continuar?",
+                                "Eliminar categoría",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+                            if (resultado == DialogResult.Yes)
                             {
-                                DialogResult resultado = MessageBox.Show("La categoria tiene articulos asociados. Si la elimina se borrarán también los articulos asociados.", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if (resultado == DialogResult.No)
+                                // Elimina los artículos asociados antes de borrar la categoría.
+                                // Si tu método eliminarArticulo espera un Id en lugar de un objeto, cambia art por art.Id
+                                foreach (Articulo art in articulosAsociados)
                                 {
-                                    return;
+                                    articuloNegocio.eliminarArticulo(art);
                                 }
-                                else if (resultado == DialogResult.Yes)
-                                {
-                                    articuloNegocio.eliminarArticulo(categoriaSeleccionada.Id);
-                                    categoriaNegocio.eliminarCategoria(categoriaSeleccionada.Id);
-                                    cargarDgv();
-                                }
+
+                                // Si eliminarCategoria espera un Id en lugar del objeto, pasa categoriaSeleccionada.id o .Id
+                                categoriaNegocio.eliminarCategoria(categoriaSeleccionada.Id);
+                                cargarDgv();
                             }
-                            
+                        }
+                        else
+                        {
+                            DialogResult resultado = MessageBox.Show(
+                                "¿Está seguro que desea eliminar la categoría?",
+                                "Eliminar categoría",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+                            if (resultado == DialogResult.Yes)
+                            {
+                                categoriaNegocio.eliminarCategoria(categoriaSeleccionada.Id);
+                                cargarDgv();
+                                }
                         }
                     }
                 }
@@ -569,6 +599,11 @@ namespace TPWinform_equipo_g
         }
     }
 }
+
+
+
+
+
 
 
 
