@@ -325,10 +325,10 @@ namespace TPWinform_equipo_g
             }
             else if (tipoListado == "Categoria")
             {
-                Categoria categoriaSeleccionada;
-                categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
-                frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaSeleccionada);
-                frmAltaCategoria.ShowDialog();
+                //Categoria categoriaSeleccionada;
+                //categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;//se rompe aca
+                //frmAltaCategoria frmAltaCategoria = new frmAltaCategoria(categoriaActual);
+                //frmAltaCategoria.ShowDialog();
             }
             cargarDgv();
         }
@@ -433,6 +433,23 @@ namespace TPWinform_equipo_g
 
                 throw ex;
             }
+            try
+            {
+                if (tipoListado == "Categoria")
+                {
+                    //DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminarla categoria, " + categoriaSeleccionada.Descripcion + "?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                    Categoria categoriaSeleccionada;
+                    categoriaSeleccionada = (Categoria)dgv_BaseDatos.CurrentRow.DataBoundItem;
+                    //categoriaNegocio.eliminarCategoria(categoriaSeleccionada);
+                    cargarDgv();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         private void mostrarFiltroBD(string tipolistado, bool visible)
