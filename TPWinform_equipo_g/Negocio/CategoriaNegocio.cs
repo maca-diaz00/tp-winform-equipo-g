@@ -79,24 +79,6 @@ namespace Negocio
             }
         }
 
-        public void eliminarConArticulos(int idCategoria)
-        {
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-            // Obtener todos los artículos y eliminar los que pertenecen a la categoría
-            List<Articulo> articulosAsociados = articuloNegocio.listarArticulos();
-
-            foreach (Articulo art in articulosAsociados)
-            {
-                if (art.Categoria != null && art.Categoria.Id == idCategoria)
-                {
-                    // eliminarArticulo(Articulo) elimina sus imágenes internamente si corresponde
-                    articuloNegocio.eliminarArticulo(art);
-                }
-            }
-
-            // luego se elimina la categoría
-            eliminarCategoria(idCategoria);
-        }
         public void eliminarCategoria(int id)
         {
             AccesoDatos datos = new AccesoDatos();
