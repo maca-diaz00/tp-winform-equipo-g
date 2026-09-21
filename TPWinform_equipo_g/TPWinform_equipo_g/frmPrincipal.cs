@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,7 +26,9 @@ namespace TPWinform_equipo_g
         CategoriaNegocio categoriaNegocio;
         MarcaNegocio marcaNegocio;
         frmAltaMarca frmAltaMarca;
+        RecursoSonoro reproductor;
 
+        Validaciones validar;
         public frmPrincipal()
         {
             InitializeComponent();
@@ -33,6 +36,7 @@ namespace TPWinform_equipo_g
             articuloActual = new Articulo();
             categoriaNegocio = new CategoriaNegocio();
             marcaNegocio = new MarcaNegocio();
+            reproductor = new RecursoSonoro();
 
         }
 
@@ -75,7 +79,7 @@ namespace TPWinform_equipo_g
 
         private void bt_Categoria_Click(object sender, EventArgs e)
         {
-            
+            reproductor.ClickSonido();
             if (dgv_BaseDatos.Visible == false || tipoListado != "Categoria")
             {
                 
@@ -97,6 +101,8 @@ namespace TPWinform_equipo_g
 
         private void bt_Marca_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
+
             if (dgv_BaseDatos.Visible == false || tipoListado != "Marca")
             {
                 tipoListado = "Marca";
@@ -116,6 +122,7 @@ namespace TPWinform_equipo_g
 
         private void bt_Articulo_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             if (dgv_BaseDatos.Visible == false || tipoListado != "Articulo")
             {
                 tipoListado = "Articulo";
@@ -235,6 +242,7 @@ namespace TPWinform_equipo_g
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             if (tipoListado == "Articulo")
             {
                 frmAltaArticulo = new frmAltaArticulo();
@@ -304,13 +312,36 @@ namespace TPWinform_equipo_g
 
         private void lblBorrarBusqueda_Click(object sender, EventArgs e)
         {
-            txtFiltroBaseDatos.Text = ""; 
-           
-            cargarDgv();
+            reproductor.ClickSonido();
+            try
+            {
+                txtFiltroBaseDatos.Text = "";
+                if (cbCriterio.SelectedIndex != -1)
+                {
+                    cbCriterio.SelectedIndex = -1;
+                }
+
+                if (cbColumna.SelectedIndex != -1)
+                {
+                    cbColumna.SelectedIndex = -1;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al borrar el filtro: " + ex.Message);
+            }
+            finally
+            {
+                cargarDgv();
+            }
+
+
+
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             if (tipoListado == "Articulo")
             {
                 frmAltaArticulo = new frmAltaArticulo(articuloActual);
@@ -321,6 +352,7 @@ namespace TPWinform_equipo_g
             {
                 if (dgv_BaseDatos.CurrentRow == null)
                 {
+                    reproductor.ErrorSonido();
                     MessageBox.Show("Seleccione una marca para editar");
                     return;
                 }
@@ -417,6 +449,7 @@ namespace TPWinform_equipo_g
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             try
             {
                 DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -431,14 +464,41 @@ namespace TPWinform_equipo_g
                     else if (tipoListado == "Marca")
                     {
                         Marca marcaSeleccionada;
+                        int cantidadAfectados;
+                        List <Marca> listaMarcas = new List<Marca>();
                         if (dgv_BaseDatos.CurrentRow == null)
                         {
+                            reproductor.ErrorSonido();
                             MessageBox.Show("Seleccione una marca para eliminar");
                             return;
                         }
+
                         marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;
-                        marcaNegocio.eliminarMarca(marcaSeleccionada);
-                        cargarDgv();
+                        listaMarcas = marcaNegocio.listar();
+                        cantidadAfectados = listaMarcas.Count(x => x.Id == marcaSeleccionada.Id);
+                        cantidadAfectados++;
+                        if (cantidadAfectados > 0)
+                        {
+                            
+                            DialogResult resultado = MessageBox.Show(
+                                "Hay " + cantidadAfectados + " artículos con esa marca. Si borras la marca afectara a dichos artículos, ¿deseas continuar?",
+                                "Eliminar marca",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Warning);
+
+                            if (resultado == DialogResult.Yes)
+                            {
+                                foreach (Articulo art in articuloNegocio.listarArticulos())
+                                {
+                                    if (art.Marca.Id == marcaSeleccionada.Id)
+                                    {  
+                                        articuloNegocio.eliminarArticulo(art);
+                                    }
+                                }
+                                marcaNegocio.eliminarMarca(marcaSeleccionada);
+                                cargarDgv();
+                            }
+                        }
                     }
                     else if (tipoListado == "Categoria")
                     {
@@ -553,6 +613,13 @@ namespace TPWinform_equipo_g
 
         private void bt_Buscar_Click_1(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
+            if (cbColumna.SelectedIndex == -1 || cbCriterio.SelectedIndex == -1 || txtFiltroBaseDatos.Text == "")
+            {
+                reproductor.ErrorSonido();
+                MessageBox.Show("Debe seleccionar una columna, un criterio y un valor para filtrar.");
+                return;
+            }
             try
             {
                 string campo = cbColumna.SelectedItem.ToString();
@@ -582,23 +649,76 @@ namespace TPWinform_equipo_g
 
         private void cbColumna_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            if (cbColumna.SelectedItem.ToString() == "Precio" || cbColumna.SelectedItem.ToString() == "Id")
+            if (cbColumna.SelectedIndex != -1)
             {
-                cbCriterio.Items.Clear();
-                cbCriterio.Items.Add("Mayor a");
-                cbCriterio.Items.Add("Menor a");
-                cbCriterio.Items.Add("Igual a");
+                txtFiltroBaseDatos.Enabled = true;
             }
             else
             {
-                cbCriterio.Items.Clear();
-                cbCriterio.Items.Add("Comienza con");
-                cbCriterio.Items.Add("Termina con");
-                cbCriterio.Items.Add("Contiene");
+                txtFiltroBaseDatos.Enabled = false;
+            }
+            try
+            {
+                if (cbColumna.SelectedIndex != -1)
+                {
+
+                    if (cbColumna.SelectedItem.ToString() == "Precio" || cbColumna.SelectedItem.ToString() == "Id")
+                    {
+                        cbCriterio.Items.Clear();
+                        cbCriterio.Items.Add("Mayor a");
+                        cbCriterio.Items.Add("Menor a");
+                        cbCriterio.Items.Add("Igual a");
+                    }
+                    else
+                    {
+                        cbCriterio.Items.Clear();
+                        cbCriterio.Items.Add("Comienza con");
+                        cbCriterio.Items.Add("Termina con");
+                        cbCriterio.Items.Add("Contiene");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Columna:" + ex.Message);
             }
         }
+
+        private void txtFiltroBaseDatos_TextChanged(object sender, EventArgs e)
+        {
+            validar = new Validaciones();
+            try
+            {
+                if (cbColumna.SelectedItem.ToString() == "Precio" || cbColumna.SelectedItem.ToString() == "Id")
+                {
+                    if (!validar.soloNumeros(txtFiltroBaseDatos.Text))
+                    {
+                        MessageBox.Show("El valor ingresado debe ser númerico.");
+                        txtFiltroBaseDatos.Text = "";
+                    }
+                    else if (cbColumna.SelectedItem.ToString() == "Nombre")
+                    {
+                        if (!validar.soloLetras(txtFiltroBaseDatos.Text))
+                        {
+                            MessageBox.Show("El valor ingresado debe ser alfabético.");
+                            txtFiltroBaseDatos.Text = "";
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
     }
 }
+
 
 
 

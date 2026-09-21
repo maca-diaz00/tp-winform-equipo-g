@@ -18,6 +18,7 @@ namespace TPWinform_equipo_g
         private Marca marca = null;
         private List<Marca> lista;
         bool bModificar = false;
+        RecursoSonoro reproductor;
         public frmAltaMarca()
         {
             InitializeComponent();
@@ -25,6 +26,7 @@ namespace TPWinform_equipo_g
             marca = new Marca();
             lista = new List<Marca>();
             lista = marcaNegocio.listar();
+            reproductor = new RecursoSonoro();
 
         }
 
@@ -37,7 +39,7 @@ namespace TPWinform_equipo_g
             lista = marcaNegocio.listar();
             Text = "Modificar marca";
             bModificar = true;
-
+            reproductor = new RecursoSonoro();
         }
 
         private void frmAltaMarca_Load(object sender, EventArgs e)
@@ -55,8 +57,8 @@ namespace TPWinform_equipo_g
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             bool bExiste = false;
+            reproductor.ClickSonido();
 
-            
             foreach (Marca item in lista)
             {
                 if (item.Descripcion.ToUpper() == txtNombre.Text.ToUpper())
@@ -106,6 +108,7 @@ namespace TPWinform_equipo_g
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             Close();
         }
 
