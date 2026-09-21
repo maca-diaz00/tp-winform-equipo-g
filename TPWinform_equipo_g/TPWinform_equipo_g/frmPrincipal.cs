@@ -131,6 +131,10 @@ namespace TPWinform_equipo_g
                 mostrarFiltroBD(tipoListado, true);
             } else if (dgv_BaseDatos.Visible == true && tipoListado == "Articulo")
             {
+                btnAnteriorImagen.Visible = false;
+                btnSiguienteImagen.Visible = false;
+                pbxArticulos.Visible = false;
+                lblDetalleArticulo.Visible = false;
                 mostrarDgvYBtnABM(false);
                 mostrarFiltroBD(tipoListado, false);
 
@@ -180,6 +184,7 @@ namespace TPWinform_equipo_g
 
         private void dgv_BaseDatos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            reproductor.ClickSonido();
             if (tipoListado == "Articulo")
             {
                 lblDetalleArticulo.Text = "Ver detalle";
@@ -197,7 +202,7 @@ namespace TPWinform_equipo_g
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
-
+            reproductor.ClickSonido();
 
             if (indiceImagen < articuloActual.cantidadImagenes() - 1)
             {
@@ -210,6 +215,7 @@ namespace TPWinform_equipo_g
 
         private void btnAnteriorImagen_Click(object sender, EventArgs e)
         {
+            reproductor.ClickSonido();
             if (indiceImagen > 0)
             {
                 indiceImagen--;
@@ -296,7 +302,8 @@ namespace TPWinform_equipo_g
 
         private void lblDetalleArticulo_Click(object sender, EventArgs e)
         {
-            if(lblDetalleArticulo.Text=="Ver detalle")
+            reproductor.ClickSonido();
+            if (lblDetalleArticulo.Text=="Ver detalle")
             {
                 mostrarDetalleArticulo(true);
                 lblDetalleArticulo.Text = "Ocultar detalle";
@@ -344,6 +351,12 @@ namespace TPWinform_equipo_g
             reproductor.ClickSonido();
             if (tipoListado == "Articulo")
             {
+                if (dgv_BaseDatos.CurrentRow == null)
+                {
+                    reproductor.ErrorSonido();
+                    MessageBox.Show("Seleccione un articulo para editar");
+                    return;
+                }
                 frmAltaArticulo = new frmAltaArticulo(articuloActual);
                 frmAltaArticulo.ShowDialog();
 
@@ -452,6 +465,12 @@ namespace TPWinform_equipo_g
             reproductor.ClickSonido();
             try
             {
+                if (dgv_BaseDatos.CurrentRow == null)
+                {
+                    reproductor.ErrorSonido();
+                    MessageBox.Show("Seleccione una opción para eliminar");
+                    return;
+                }
                 DialogResult confirmacion = MessageBox.Show("¿Está seguro que desea eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
                 if (confirmacion == DialogResult.Yes)
                 {
@@ -466,12 +485,6 @@ namespace TPWinform_equipo_g
                         Marca marcaSeleccionada;
                         int cantidadAfectados;
                         List <Marca> listaMarcas = new List<Marca>();
-                        if (dgv_BaseDatos.CurrentRow == null)
-                        {
-                            reproductor.ErrorSonido();
-                            MessageBox.Show("Seleccione una marca para eliminar");
-                            return;
-                        }
 
                         marcaSeleccionada = (Marca)dgv_BaseDatos.CurrentRow.DataBoundItem;
                         listaMarcas = marcaNegocio.listar();
