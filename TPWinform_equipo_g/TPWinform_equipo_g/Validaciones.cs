@@ -23,6 +23,18 @@ namespace TPWinform_equipo_g
             }
             return true;
         }
+        public bool soloDecimal(string texto)
+        {
+            foreach (char item in texto)
+            {
+                if (!char.IsNumber(item)&&item!=',')
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
 
         public bool soloLetras(string texto)
         {

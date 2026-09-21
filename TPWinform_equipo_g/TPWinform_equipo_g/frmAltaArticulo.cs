@@ -115,14 +115,15 @@ namespace TPWinform_equipo_g
                     MessageBox.Show("Debe completar correctamente todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (!modificacion)
-                {
                     articulo.Codigo = txtCodigo.Text;
                     articulo.Nombre = txtNombre.Text;
                     articulo.Descripcion = txtDescripcion.Text;
                     articulo.Marca = (Marca)cbxMarca.SelectedItem;
                     articulo.Categoria = (Categoria)cbxCategoria.SelectedItem;
                     articulo.Precio = decimal.Parse(txtPrecio.Text);
+
+                if (!modificacion)
+                {
                     if (articulo.cantidadImagenes() == 0)
                     {
                         articulo.agregarImagen("");
@@ -429,7 +430,7 @@ namespace TPWinform_equipo_g
             cat = valido.cbxVacio(cbxMarca);
             marca = valido.cbxVacio(cbxMarca);
             precioVacio = valido.vacio(txtPrecio.Text);
-            precioNum = valido.soloNumeros(txtPrecio.Text);
+            precioNum = valido.soloDecimal(txtPrecio.Text);
 
             lblCamposObligatorios(codigo, nombre, desc, cat, marca,precioVacio,precioNum);
             if (nombre || codigo || desc || cat || marca || precioVacio||!precioNum)
