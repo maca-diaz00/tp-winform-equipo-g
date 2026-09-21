@@ -69,5 +69,15 @@ namespace TPWinform_equipo_g
             }
             return false;
         }
+
+        public bool vacio(string texto)
+        {
+            if (string.IsNullOrEmpty(texto))
+            {
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

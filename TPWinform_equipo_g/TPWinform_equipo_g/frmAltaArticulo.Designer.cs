@@ -59,6 +59,19 @@
             this.btnModificarTodos = new System.Windows.Forms.Button();
             this.btnLimpiarTxtImagen = new System.Windows.Forms.Button();
             this.btnEditarImagenes = new System.Windows.Forms.Button();
+            this.lblCodigoObligatorioE = new System.Windows.Forms.Label();
+            this.lblNombreObligatorioE = new System.Windows.Forms.Label();
+            this.lblDescObligatoriaE = new System.Windows.Forms.Label();
+            this.lblMarcaObligatoriaE = new System.Windows.Forms.Label();
+            this.lblCatObligatoriaE = new System.Windows.Forms.Label();
+            this.lblPrecioObligatorioE = new System.Windows.Forms.Label();
+            this.lblCodigoObligatorio = new System.Windows.Forms.Label();
+            this.lblNombreObligatorio = new System.Windows.Forms.Label();
+            this.lblDescObligatoria = new System.Windows.Forms.Label();
+            this.lblMarcaObligatoria = new System.Windows.Forms.Label();
+            this.lblCatObligatoria = new System.Windows.Forms.Label();
+            this.lblPrecioObligatorio = new System.Windows.Forms.Label();
+            this.lblPrecioNumObligatorios = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,8 +170,10 @@
             // 
             // cbxMarca
             // 
+            this.cbxMarca.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxMarca.FormattingEnabled = true;
+            this.cbxMarca.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cbxMarca.Location = new System.Drawing.Point(147, 235);
             this.cbxMarca.Name = "cbxMarca";
             this.cbxMarca.Size = new System.Drawing.Size(201, 21);
@@ -166,6 +181,7 @@
             // 
             // cbxCategoria
             // 
+            this.cbxCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbxCategoria.FormattingEnabled = true;
             this.cbxCategoria.Location = new System.Drawing.Point(147, 278);
@@ -367,11 +383,180 @@
             this.btnEditarImagenes.UseVisualStyleBackColor = true;
             this.btnEditarImagenes.Click += new System.EventHandler(this.btnEditarImagenes_Click);
             // 
+            // lblCodigoObligatorioE
+            // 
+            this.lblCodigoObligatorioE.AutoSize = true;
+            this.lblCodigoObligatorioE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigoObligatorioE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblCodigoObligatorioE.Location = new System.Drawing.Point(354, 67);
+            this.lblCodigoObligatorioE.Name = "lblCodigoObligatorioE";
+            this.lblCodigoObligatorioE.Size = new System.Drawing.Size(17, 17);
+            this.lblCodigoObligatorioE.TabIndex = 30;
+            this.lblCodigoObligatorioE.Text = "* ";
+            this.lblCodigoObligatorioE.Visible = false;
+            // 
+            // lblNombreObligatorioE
+            // 
+            this.lblNombreObligatorioE.AutoSize = true;
+            this.lblNombreObligatorioE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreObligatorioE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblNombreObligatorioE.Location = new System.Drawing.Point(354, 107);
+            this.lblNombreObligatorioE.Name = "lblNombreObligatorioE";
+            this.lblNombreObligatorioE.Size = new System.Drawing.Size(13, 17);
+            this.lblNombreObligatorioE.TabIndex = 31;
+            this.lblNombreObligatorioE.Text = "*";
+            this.lblNombreObligatorioE.Visible = false;
+            // 
+            // lblDescObligatoriaE
+            // 
+            this.lblDescObligatoriaE.AutoSize = true;
+            this.lblDescObligatoriaE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescObligatoriaE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblDescObligatoriaE.Location = new System.Drawing.Point(354, 145);
+            this.lblDescObligatoriaE.Name = "lblDescObligatoriaE";
+            this.lblDescObligatoriaE.Size = new System.Drawing.Size(13, 17);
+            this.lblDescObligatoriaE.TabIndex = 32;
+            this.lblDescObligatoriaE.Text = "*";
+            this.lblDescObligatoriaE.Visible = false;
+            // 
+            // lblMarcaObligatoriaE
+            // 
+            this.lblMarcaObligatoriaE.AutoSize = true;
+            this.lblMarcaObligatoriaE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMarcaObligatoriaE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblMarcaObligatoriaE.Location = new System.Drawing.Point(354, 235);
+            this.lblMarcaObligatoriaE.Name = "lblMarcaObligatoriaE";
+            this.lblMarcaObligatoriaE.Size = new System.Drawing.Size(13, 17);
+            this.lblMarcaObligatoriaE.TabIndex = 33;
+            this.lblMarcaObligatoriaE.Text = "*";
+            this.lblMarcaObligatoriaE.Visible = false;
+            // 
+            // lblCatObligatoriaE
+            // 
+            this.lblCatObligatoriaE.AutoSize = true;
+            this.lblCatObligatoriaE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCatObligatoriaE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblCatObligatoriaE.Location = new System.Drawing.Point(354, 278);
+            this.lblCatObligatoriaE.Name = "lblCatObligatoriaE";
+            this.lblCatObligatoriaE.Size = new System.Drawing.Size(13, 17);
+            this.lblCatObligatoriaE.TabIndex = 34;
+            this.lblCatObligatoriaE.Text = "*";
+            this.lblCatObligatoriaE.Visible = false;
+            // 
+            // lblPrecioObligatorioE
+            // 
+            this.lblPrecioObligatorioE.AutoSize = true;
+            this.lblPrecioObligatorioE.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioObligatorioE.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblPrecioObligatorioE.Location = new System.Drawing.Point(354, 319);
+            this.lblPrecioObligatorioE.Name = "lblPrecioObligatorioE";
+            this.lblPrecioObligatorioE.Size = new System.Drawing.Size(13, 17);
+            this.lblPrecioObligatorioE.TabIndex = 35;
+            this.lblPrecioObligatorioE.Text = "*";
+            this.lblPrecioObligatorioE.Visible = false;
+            // 
+            // lblCodigoObligatorio
+            // 
+            this.lblCodigoObligatorio.AutoSize = true;
+            this.lblCodigoObligatorio.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigoObligatorio.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblCodigoObligatorio.Location = new System.Drawing.Point(145, 52);
+            this.lblCodigoObligatorio.Name = "lblCodigoObligatorio";
+            this.lblCodigoObligatorio.Size = new System.Drawing.Size(206, 13);
+            this.lblCodigoObligatorio.TabIndex = 36;
+            this.lblCodigoObligatorio.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblCodigoObligatorio.Visible = false;
+            // 
+            // lblNombreObligatorio
+            // 
+            this.lblNombreObligatorio.AutoSize = true;
+            this.lblNombreObligatorio.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombreObligatorio.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblNombreObligatorio.Location = new System.Drawing.Point(145, 90);
+            this.lblNombreObligatorio.Name = "lblNombreObligatorio";
+            this.lblNombreObligatorio.Size = new System.Drawing.Size(206, 13);
+            this.lblNombreObligatorio.TabIndex = 37;
+            this.lblNombreObligatorio.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblNombreObligatorio.Visible = false;
+            // 
+            // lblDescObligatoria
+            // 
+            this.lblDescObligatoria.AutoSize = true;
+            this.lblDescObligatoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescObligatoria.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblDescObligatoria.Location = new System.Drawing.Point(144, 129);
+            this.lblDescObligatoria.Name = "lblDescObligatoria";
+            this.lblDescObligatoria.Size = new System.Drawing.Size(206, 13);
+            this.lblDescObligatoria.TabIndex = 38;
+            this.lblDescObligatoria.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblDescObligatoria.Visible = false;
+            // 
+            // lblMarcaObligatoria
+            // 
+            this.lblMarcaObligatoria.AutoSize = true;
+            this.lblMarcaObligatoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMarcaObligatoria.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblMarcaObligatoria.Location = new System.Drawing.Point(145, 219);
+            this.lblMarcaObligatoria.Name = "lblMarcaObligatoria";
+            this.lblMarcaObligatoria.Size = new System.Drawing.Size(206, 13);
+            this.lblMarcaObligatoria.TabIndex = 39;
+            this.lblMarcaObligatoria.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblMarcaObligatoria.Visible = false;
+            // 
+            // lblCatObligatoria
+            // 
+            this.lblCatObligatoria.AutoSize = true;
+            this.lblCatObligatoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCatObligatoria.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblCatObligatoria.Location = new System.Drawing.Point(145, 262);
+            this.lblCatObligatoria.Name = "lblCatObligatoria";
+            this.lblCatObligatoria.Size = new System.Drawing.Size(206, 13);
+            this.lblCatObligatoria.TabIndex = 40;
+            this.lblCatObligatoria.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblCatObligatoria.Visible = false;
+            // 
+            // lblPrecioObligatorio
+            // 
+            this.lblPrecioObligatorio.AutoSize = true;
+            this.lblPrecioObligatorio.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioObligatorio.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblPrecioObligatorio.Location = new System.Drawing.Point(145, 303);
+            this.lblPrecioObligatorio.Name = "lblPrecioObligatorio";
+            this.lblPrecioObligatorio.Size = new System.Drawing.Size(206, 13);
+            this.lblPrecioObligatorio.TabIndex = 41;
+            this.lblPrecioObligatorio.Text = "Campo obligatorio, no puede quedar vacío";
+            this.lblPrecioObligatorio.Visible = false;
+            // 
+            // lblPrecioNumObligatorios
+            // 
+            this.lblPrecioNumObligatorios.AutoSize = true;
+            this.lblPrecioNumObligatorios.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecioNumObligatorios.ForeColor = System.Drawing.Color.DarkRed;
+            this.lblPrecioNumObligatorios.Location = new System.Drawing.Point(145, 303);
+            this.lblPrecioNumObligatorios.Name = "lblPrecioNumObligatorios";
+            this.lblPrecioNumObligatorios.Size = new System.Drawing.Size(180, 13);
+            this.lblPrecioNumObligatorios.TabIndex = 42;
+            this.lblPrecioNumObligatorios.Text = "Debe contener unicamente números.";
+            this.lblPrecioNumObligatorios.Visible = false;
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 526);
+            this.Controls.Add(this.lblPrecioNumObligatorios);
+            this.Controls.Add(this.lblPrecioObligatorio);
+            this.Controls.Add(this.lblCatObligatoria);
+            this.Controls.Add(this.lblMarcaObligatoria);
+            this.Controls.Add(this.lblDescObligatoria);
+            this.Controls.Add(this.lblNombreObligatorio);
+            this.Controls.Add(this.lblCodigoObligatorio);
+            this.Controls.Add(this.lblPrecioObligatorioE);
+            this.Controls.Add(this.lblCatObligatoriaE);
+            this.Controls.Add(this.lblMarcaObligatoriaE);
+            this.Controls.Add(this.lblDescObligatoriaE);
+            this.Controls.Add(this.lblNombreObligatorioE);
+            this.Controls.Add(this.lblCodigoObligatorioE);
             this.Controls.Add(this.btnEditarImagenes);
             this.Controls.Add(this.btnLimpiarTxtImagen);
             this.Controls.Add(this.btnModificarTodos);
@@ -406,6 +591,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nuevo Articulo";
             this.Load += new System.EventHandler(this.frmAltaArticulo_Load);
+            this.Click += new System.EventHandler(this.frmAltaArticulo_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pbxImagen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -444,5 +630,18 @@
         private System.Windows.Forms.Button btnModificarTodos;
         private System.Windows.Forms.Button btnLimpiarTxtImagen;
         private System.Windows.Forms.Button btnEditarImagenes;
+        private System.Windows.Forms.Label lblCodigoObligatorioE;
+        private System.Windows.Forms.Label lblNombreObligatorioE;
+        private System.Windows.Forms.Label lblDescObligatoriaE;
+        private System.Windows.Forms.Label lblMarcaObligatoriaE;
+        private System.Windows.Forms.Label lblCatObligatoriaE;
+        private System.Windows.Forms.Label lblPrecioObligatorioE;
+        private System.Windows.Forms.Label lblCodigoObligatorio;
+        private System.Windows.Forms.Label lblNombreObligatorio;
+        private System.Windows.Forms.Label lblDescObligatoria;
+        private System.Windows.Forms.Label lblMarcaObligatoria;
+        private System.Windows.Forms.Label lblCatObligatoria;
+        private System.Windows.Forms.Label lblPrecioObligatorio;
+        private System.Windows.Forms.Label lblPrecioNumObligatorios;
     }
 }

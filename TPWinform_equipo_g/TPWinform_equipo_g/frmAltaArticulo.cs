@@ -24,6 +24,8 @@ namespace TPWinform_equipo_g
         private Imagen imagenAux;
         private int indiceImagen;
         bool modificacion;
+        RecursoSonoro sonido;
+        Validaciones valido;
 
 
 
@@ -39,8 +41,11 @@ namespace TPWinform_equipo_g
             botonesEditar(false);
             txtHabilitados(true);
             modificacion = false;
-
+            sonido = new RecursoSonoro();
+            valido = new Validaciones();
+            
         }
+
 
 
         public frmAltaArticulo(Articulo articulo)
@@ -55,17 +60,17 @@ namespace TPWinform_equipo_g
             articuloNegocio = new ArticuloNegocio();
             imagenNegocio = new ImagenNegocio();
             modificacion = true;
-
-
-
+            sonido = new RecursoSonoro();
+            valido = new Validaciones();
+            
         }
 
         private void frmAltaArticulo_Load(object sender, EventArgs e)
         {
             
-            
             try
             {
+             
                 cbxCategoria.DataSource = categoriaNegocio.listar();
                 cbxCategoria.ValueMember = "Id";
                 cbxCategoria.DisplayMember = "Descripcion";
@@ -101,9 +106,15 @@ namespace TPWinform_equipo_g
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             
             try
             {
+                if (!validarCampos())
+                {
+                    MessageBox.Show("Debe completar correctamente todos los campos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 if (!modificacion)
                 {
                     articulo.Codigo = txtCodigo.Text;
@@ -126,6 +137,7 @@ namespace TPWinform_equipo_g
                 }
                 else
                 {
+
                     int nuevasImagenes = articulo.cantidadImagenes();
                     articuloNegocio.nuevoArticulo(articulo);
                     for(int i = 0; i < nuevasImagenes; i++)
@@ -143,10 +155,10 @@ namespace TPWinform_equipo_g
                 Close();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
 
@@ -154,6 +166,7 @@ namespace TPWinform_equipo_g
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             Close();
         }
 
@@ -173,6 +186,7 @@ namespace TPWinform_equipo_g
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             articulo.agregarImagen(txtImagen.Text);
             txtImagen.Text = "";
             indiceImagen = articulo.cantidadImagenes() - 1;
@@ -183,21 +197,22 @@ namespace TPWinform_equipo_g
         }
 
             private void mostrarImagen(Articulo articulo, int indice)
-        {
-            try
             {
-                pbxImagen.Load(articulo.Imagenes[indice].UrlImagen);
-            }
-            catch (Exception)
-            {
+                try
+                {
+                    pbxImagen.Load(articulo.Imagenes[indice].UrlImagen);
+                }
+                catch (Exception)
+                {
 
-                pbxImagen.Load("https://media.istockphoto.com/id/1980276924/es/vector/sin-elemento-gr%C3%A1fico-en-miniatura-de-la-foto-no-se-ha-encontrado-ninguna-imagen-o-est%C3%A1.jpg?s=612x612&w=0&k=20&c=artWlQoi5R1edWQBv9LfzeLXupOcH_alZnMgvXdYkF4=");
+                    pbxImagen.Load("https://media.istockphoto.com/id/1980276924/es/vector/sin-elemento-gr%C3%A1fico-en-miniatura-de-la-foto-no-se-ha-encontrado-ninguna-imagen-o-est%C3%A1.jpg?s=612x612&w=0&k=20&c=artWlQoi5R1edWQBv9LfzeLXupOcH_alZnMgvXdYkF4=");
+                }
             }
-        }
         
 
         private void btnEliminarImagen_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             articulo.Imagenes.RemoveAt(indiceImagen);
             
             if (indiceImagen == articulo.cantidadImagenes())
@@ -215,6 +230,7 @@ namespace TPWinform_equipo_g
 
         private void btnAnteriorImagen_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             if (indiceImagen > 0)
             {
                 indiceImagen--;
@@ -226,6 +242,7 @@ namespace TPWinform_equipo_g
 
         private void btnSiguienteImagen_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             if (indiceImagen < articulo.cantidadImagenes() - 1)
             {
                 indiceImagen++;
@@ -274,7 +291,7 @@ namespace TPWinform_equipo_g
 
         private void btnModificarTodos_Click(object sender, EventArgs e)
         {
-            
+            sonido.ClickSonido();
             txtHabilitados(true);
             botonesEditar(false);
         }
@@ -311,6 +328,7 @@ namespace TPWinform_equipo_g
 
         private void btnEditarCodigo_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarCodigo.Visible = false;
             
             txtCodigo.Enabled = true;
@@ -319,6 +337,7 @@ namespace TPWinform_equipo_g
 
         private void btnEditarNombre_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarNombre.Visible = false;
             
             txtNombre.Enabled = true;
@@ -326,6 +345,7 @@ namespace TPWinform_equipo_g
 
         private void btnEditarDesc_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarDesc.Visible = false;
             
             txtDescripcion.Enabled = true;
@@ -333,6 +353,7 @@ namespace TPWinform_equipo_g
 
         private void btnEditarMarca_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarMarca.Visible = false;
             
             cbxMarca.Enabled = true;
@@ -340,6 +361,7 @@ namespace TPWinform_equipo_g
 
         private void btnEditarCat_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarCat.Visible = false;
             
             cbxCategoria.Enabled = true;
@@ -347,12 +369,14 @@ namespace TPWinform_equipo_g
 
         private void btnEditarPrecio_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarPrecio.Visible = false;
             txtPrecio.Enabled = true;
         }
 
         private void btnEditarImagenes_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             btnEditarImagenes.Visible = false;
             txtImagen.Enabled = true;
             btnAgregarImagen.Visible = true;
@@ -361,9 +385,61 @@ namespace TPWinform_equipo_g
         }
         private void btnLimpiarTxtImagen_Click(object sender, EventArgs e)
         {
+            sonido.ClickSonido();
             txtImagen.Text = "";
         }
 
+        private void frmAltaArticulo_Click(object sender, EventArgs e)
+        {
+            sonido.ClickSonido();
+        }
 
+
+        private void lblCamposObligatorios(bool codigo, bool nombre, bool desc, bool cat, bool marca, bool precioVacio, bool precioNum)
+        {
+            lblPrecioObligatorioE.Visible = false;
+            lblCodigoObligatorio.Visible = codigo;
+            lblCodigoObligatorioE.Visible = codigo;
+            lblNombreObligatorio.Visible = nombre;
+            lblNombreObligatorioE.Visible = nombre;
+            lblDescObligatoria.Visible = desc;
+            lblDescObligatoriaE.Visible = desc;
+            lblCatObligatoria.Visible = cat;
+            lblCatObligatoriaE.Visible = cat;
+            lblMarcaObligatoria.Visible = marca;
+            lblMarcaObligatoriaE.Visible = marca;
+            lblPrecioNumObligatorios.Visible = !precioNum;
+            lblPrecioObligatorio.Visible = precioVacio;
+            if (!precioNum)
+            {
+                lblPrecioObligatorioE.Visible = !precioNum;
+            }
+            if (precioVacio)
+            {
+                lblPrecioObligatorioE.Visible = precioVacio;
+            }
+        }
+
+        private bool validarCampos()
+        {
+            bool codigo, nombre, desc, cat, marca, precioVacio, precioNum;
+            codigo = valido.vacio(txtCodigo.Text);
+            nombre = valido.vacio(txtNombre.Text);
+            desc = valido.vacio(txtDescripcion.Text);
+            cat = valido.cbxVacio(cbxMarca);
+            marca = valido.cbxVacio(cbxMarca);
+            precioVacio = valido.vacio(txtPrecio.Text);
+            precioNum = valido.soloNumeros(txtPrecio.Text);
+
+            lblCamposObligatorios(codigo, nombre, desc, cat, marca,precioVacio,precioNum);
+            if (nombre || codigo || desc || cat || marca || precioVacio||!precioNum)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
